@@ -1,14 +1,18 @@
 FROM alpine:latest
 
-# Installation des outils nécessaires
 RUN apk add --no-cache ca-certificates unzip wget
 
 # Téléchargement de PocketBase
 ADD https://github.com/pocketbase/pocketbase/releases/download/v0.22.3/pocketbase_0.22.3_linux_amd64.zip /tmp/pb.zip
 RUN unzip /tmp/pb.zip -d /pb/
 
-# On expose le port 8080 pour Render
+# --- LA PARTIE IMPORTANTE ---
+# On crée le dossier où PocketBase cherche les sites web
+RUN mkdir -p /pb/pb_public
+# On copie ton fichier index.html qui est sur ton GitHub vers ce dossier
+COPY index.html /pb/pb_public/index.html
+
 EXPOSE 8080
 
-# Lancement de PocketBase sur le port 8080
-CMD ["/pb/pocketbase", "serve", "--http=0.0.0.0:8080", "--dir=/pb/pb_data"]
+# On lance PocketBase en lui disant d'utiliser ce dossier public
+CMD ["/pb/pocketbase", "serve", "--http=0.0.0.0:8080", "--dir=/pb/pb_data", "--publicDir=/pb/pb_public"]
