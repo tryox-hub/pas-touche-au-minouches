@@ -27,7 +27,7 @@
                 div.innerHTML = ''; // On vide le chargement
 
                 records.forEach(chat => {
-                    const urlImage = pb.files.getUrl(chat, chat.photo);
+                    const urlImage = pb.files.getUrl(chat, chat.photos);
                     div.innerHTML += `
                         <div class="col-md-4 mb-4">
                             <div class="card shadow">
