@@ -22,13 +22,13 @@
             padding: 40px 0 20px 0;
         }
         .header-logo img {
-            max-width: 300px;
-            width: 90%;
+            max-width: 320px; /* Taille optimisée pour ton logo */
+            width: 95%;
             height: auto;
             transition: transform 0.3s ease;
         }
         .header-logo img:hover {
-            transform: scale(1.05);
+            transform: scale(1.03);
         }
 
         /* NAVIGATION CENTRÉE */
@@ -38,7 +38,7 @@
             gap: 40px;
             margin-bottom: 60px;
             padding-bottom: 20px;
-            flex-wrap: wrap; /* Pour le mobile */
+            flex-wrap: wrap;
         }
         .nav-custom a {
             text-decoration: none;
@@ -49,7 +49,7 @@
         }
         .nav-custom a:hover { color: #d63384; }
 
-        /* SECTIONS ACCUEIL */
+        /* SECTIONS ACCUEIL (Style demandé) */
         .section-container {
             padding: 60px 0;
             align-items: center;
@@ -99,7 +99,7 @@
         .chat-card:hover { transform: translateY(-10px); }
         .chat-img { height: 320px; object-fit: cover; width: 100%; }
 
-        /* GESTION DES PAGES */
+        /* PAGES */
         .page-section { display: none; }
         .page-section.active { display: block; animation: fadeIn 0.6s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -128,7 +128,7 @@
                     <p class="text-description">Nous sommes une association dédiée à sauver les chats de la rue et de l'abandon, rassemblant des cœurs bienveillants pour cette noble cause.</p>
                     <a href="#" onclick="changerPage('chats')" class="btn-outline-custom">Rejoindre</a>
                 </div>
-                <div class="col-md-6 text-end">
+                <div class="col-md-6">
                     <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=800" class="feature-img" alt="Chat au refuge">
                 </div>
             </div>
@@ -136,10 +136,10 @@
             <div class="row section-container flex-md-row-reverse">
                 <div class="col-md-6 ps-md-5">
                     <h2>Notre mission</h2>
-                    <p class="text-description">Stériliser, soigner et trouver des foyers aimants. Nous luttons quotidiennement contre l'abandon et pour la sensibilisation au bien-être animal.</p>
+                    <p class="text-description">Stériliser, soigner et trouver des foyers aimants. Nous luttons quotidiennement contre l'abandon pour assurer le bonheur de nos protégés.</p>
                     <button class="btn btn-pink" onclick="changerPage('chats')">Nos protégés</button>
                 </div>
-                <div class="col-md-6 text-start">
+                <div class="col-md-6">
                     <img src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=800" class="feature-img" alt="Chaton">
                 </div>
             </div>
@@ -154,16 +154,14 @@
     <section id="chats" class="page-section">
         <div class="container py-5">
             <h2 class="text-center mb-5">Nos Chats Adultes 🐱</h2>
-            <div id="liste-adultes" class="row row-cols-1 row-cols-md-3 g-5">
-                </div>
+            <div id="liste-adultes" class="row row-cols-1 row-cols-md-3 g-5"></div>
         </div>
     </section>
 
     <section id="chatons" class="page-section">
         <div class="container py-5">
             <h2 class="text-center mb-5">Nos Petits Chatons 🍼</h2>
-            <div id="liste-chatons" class="row row-cols-1 row-cols-md-3 g-5">
-                </div>
+            <div id="liste-chatons" class="row row-cols-1 row-cols-md-3 g-5"></div>
         </div>
     </section>
 
@@ -172,36 +170,30 @@
             <div class="col-md-8 mx-auto py-5 border-top">
                 <h2 class="mb-4">Contactez l'association 💌</h2>
                 <p class="fs-4">pastoucheauxminouches@gmail.com</p>
-                <p class="text-muted">N'hésitez pas à nous écrire pour toute question sur une adoption ou pour nous soutenir.</p>
                 <a href="mailto:pastoucheauxminouches@gmail.com" class="btn btn-pink mt-4">Nous envoyer un message</a>
             </div>
         </div>
     </section>
 
     <script>
-        // Connexion au PocketBase sur Render
         const pb = new PocketBase('/');
 
-        // Fonction pour changer de page sans recharger
         function changerPage(pageId) {
             document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
             window.scrollTo(0,0);
         }
 
-        // Chargement automatique des animaux
         async function chargerAnimaux() {
             try {
                 const records = await pb.collection('chats').getFullList({ sort: '-created' });
                 const contAdultes = document.getElementById('liste-adultes');
                 const contChatons = document.getElementById('liste-chatons');
 
-                contAdultes.innerHTML = ''; 
-                contChatons.innerHTML = '';
+                contAdultes.innerHTML = ''; contChatons.innerHTML = '';
 
                 records.forEach(chat => {
-                    const photoUrl = chat.photos ? pb.files.getUrl(chat, chat.photos) : 'https://via.placeholder.com/400x300?text=Pas+de+photo';
-                    
+                    const photoUrl = chat.photos ? pb.files.getUrl(chat, chat.photos) : '';
                     const html = `
                         <div class="col">
                             <div class="chat-card">
@@ -209,25 +201,16 @@
                                 <div class="p-4 text-center">
                                     <h3 class="fw-bold h4 mb-2">${chat.nom}</h3>
                                     <p class="text-muted small mb-3">${chat.age}</p>
-                                    <p class="text-muted mb-3" style="font-size: 0.9rem;">${chat.description || ''}</p>
                                     <a href="mailto:pastoucheauxminouches@gmail.com?subject=Adoption de ${chat.nom}" 
                                        class="btn-outline-custom w-100 py-2">M'adopter ❤️</a>
                                 </div>
                             </div>
                         </div>`;
-
-                    if (chat.est_chaton) {
-                        contChatons.innerHTML += html;
-                    } else {
-                        contAdultes.innerHTML += html;
-                    }
+                    if (chat.est_chaton) contChatons.innerHTML += html;
+                    else contAdultes.innerHTML += html;
                 });
-            } catch (err) {
-                console.error("Erreur de chargement PocketBase:", err);
-            }
+            } catch (err) { console.error(err); }
         }
-
-        // Lancer le chargement au démarrage
         chargerAnimaux();
     </script>
 </body>
