@@ -3,234 +3,204 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Refuge de l'Espoir 🐾</title>
+    <title>Pas touche aux Minouches 🐾</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pocketbase/0.21.3/pocketbase.umd.min.js"></script>
     
     <style>
-        /* --- STYLE PERSONNALISÉ --- */
-        body {
-            font-family: 'Nunito', sans-serif;
-            background-color: #fff5f5; /* Fond légèrement rosé/crème */
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #ffffff; 
+            color: #2d3436;
         }
-        
-        /* Navigation */
-        .navbar {
-            background-color: #ffffff !important;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-        }
-        .nav-link { color: #555 !important; font-weight: 700; }
-        .nav-link:hover, .nav-link.active { color: #e67e22 !important; }
 
-        /* Hero Section (Accueil) */
-        .hero {
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 60vh;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* --- HEADER & LOGO --- */
+        .header-logo {
             text-align: center;
-            border-radius: 0 0 30px 30px;
+            padding: 40px 0;
+        }
+        .header-logo img {
+            max-width: 250px;
+            height: auto;
         }
 
-        /* Cartes des chats */
-        .chat-card {
-            border: none;
-            border-radius: 20px;
-            overflow: hidden;
-            background: white;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        /* --- NAVIGATION --- */
+        .nav-custom {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 50px;
         }
-        .chat-card:hover { transform: translateY(-10px); }
-        .chat-img { height: 250px; object-fit: cover; width: 100%; }
-        
-        /* Boutons */
-        .btn-asso {
-            background-color: #e67e22;
+        .nav-custom a {
+            text-decoration: none;
+            color: #636e72;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .nav-custom a:hover { color: #d63384; }
+
+        /* --- SECTIONS STYLE GOOGLE --- */
+        .section-container {
+            padding: 60px 0;
+        }
+        .feature-img {
+            width: 100%;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+        }
+        .content-block {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+        }
+        h2 { font-weight: 800; font-size: 2.5rem; margin-bottom: 20px; }
+        .text-muted-custom { color: #636e72; line-height: 1.8; margin-bottom: 30px; }
+
+        /* --- BOUTONS --- */
+        .btn-outline-custom {
+            border: 2px solid #dfe6e9;
+            border-radius: 50px;
+            padding: 10px 35px;
+            color: #2d3436;
+            font-weight: 600;
+            width: fit-content;
+            transition: 0.3s;
+        }
+        .btn-outline-custom:hover { background: #f1f2f6; border-color: #b2bec3; }
+
+        .btn-pink {
+            background-color: #d63384;
             color: white;
             border-radius: 50px;
-            padding: 10px 25px;
+            padding: 12px 35px;
+            font-weight: 600;
             border: none;
+            transition: 0.3s;
         }
-        .btn-asso:hover { background-color: #d35400; color: white; }
+        .btn-pink:hover { background-color: #bc2b73; transform: scale(1.05); }
 
-        /* Cacher les sections par défaut */
-        .page-section { display: none; animation: fadeIn 0.5s; }
-        .page-section.active { display: block; }
-        
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        /* --- CARTES CHATS --- */
+        .chat-card {
+            border: none;
+            border-radius: 24px;
+            overflow: hidden;
+            background: #fff;
+            transition: 0.4s;
+            margin-bottom: 30px;
+        }
+        .chat-img { height: 300px; object-fit: cover; width: 100%; }
+
+        .page-section { display: none; }
+        .page-section.active { display: block; animation: fadeIn 0.6s; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top px-3">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="#" onclick="changerPage('accueil')">🐱 Mon Asso</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="#" onclick="changerPage('accueil')">Accueil</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" onclick="changerPage('chats')">Nos Chats</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" onclick="changerPage('chatons')">Nos Chatons</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" onclick="changerPage('contact')">Contact</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <div class="header-logo">
+        <img src="logo.png" alt="Pas touche aux Minouches">
+    </div>
+
+    <div class="nav-custom">
+        <a href="#" onclick="changerPage('accueil')">Accueil</a>
+        <a href="#" onclick="changerPage('chats')">Nos Chats</a>
+        <a href="#" onclick="changerPage('chatons')">Nos Chatons</a>
+        <a href="#" onclick="changerPage('contact')">Contact</a>
+    </div>
 
     <section id="accueil" class="page-section active">
-        <div class="hero">
-            <div class="container">
-                <h1 class="display-3 fw-bold">Adoptez le bonheur</h1>
-                <p class="lead mb-4">Ils n'attendent que vous pour une nouvelle vie.</p>
-                <button class="btn btn-asso btn-lg" onclick="changerPage('chats')">Voir nos protégés</button>
+        <div class="container">
+            <div class="row section-container">
+                <div class="col-md-6 content-block">
+                    <h2>Sauvons ensemble les minouches</h2>
+                    <p class="text-muted-custom">Nous sommes une association dédiée à sauver les chats de la rue et de l'abandon, rassemblant des coeurs autour d'une noble cause.</p>
+                    <a href="#" onclick="changerPage('chats')" class="btn btn-outline-custom">Rejoindre</a>
+                </div>
+                <div class="col-md-6">
+                    <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=800&q=80" class="feature-img" alt="Chat">
+                </div>
             </div>
-        </div>
-        <div class="container py-5 text-center">
-            <h2 class="mb-4 text-secondary">Pourquoi adopter ?</h2>
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="p-4 bg-white rounded-4 shadow-sm h-100">
-                        <h3>❤️ Sauver une vie</h3>
-                        <p>En adoptant, vous libérez une place au refuge pour un autre animal en détresse.</p>
-                    </div>
+
+            <div class="row section-container flex-md-row-reverse">
+                <div class="col-md-6 content-block">
+                    <h2>Notre mission</h2>
+                    <p class="text-muted-custom">Stériliser, soigner et trouver des foyers aimants. Lutter contre l'abandon et sensibiliser le public.</p>
+                    <button class="btn btn-pink" onclick="changerPage('chats')">Nos protégés</button>
                 </div>
-                <div class="col-md-4">
-                    <div class="p-4 bg-white rounded-4 shadow-sm h-100">
-                        <h3>💉 Identifiés & Soignés</h3>
-                        <p>Tous nos chats partent vaccinés, stérilisés et identifiés.</p>
-                    </div>
+                <div class="col-md-6">
+                    <img src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=800&q=80" class="feature-img" alt="Mission">
                 </div>
-                <div class="col-md-4">
-                    <div class="p-4 bg-white rounded-4 shadow-sm h-100">
-                        <h3>🏡 Un ami pour la vie</h3>
-                        <p>Un compagnon fidèle qui vous apportera amour et réconfort au quotidien.</p>
-                    </div>
-                </div>
+            </div>
+
+            <div class="text-center py-5">
+                <h3>Adoptez, ne lâchez jamais.</h3>
+                <button class="btn btn-pink mt-3" onclick="changerPage('chats')">Découvrir les chats</button>
             </div>
         </div>
     </section>
 
     <section id="chats" class="page-section">
         <div class="container py-5">
-            <h2 class="text-center mb-5 text-secondary">Nos Chats Adultes 😺</h2>
-            <div id="liste-adultes" class="row row-cols-1 row-cols-md-3 g-4">
-                </div>
+            <h2 class="text-center mb-5">Nos Chats Adultes</h2>
+            <div id="liste-adultes" class="row row-cols-1 row-cols-md-3 g-4"></div>
         </div>
     </section>
 
     <section id="chatons" class="page-section">
         <div class="container py-5">
-            <h2 class="text-center mb-5 text-secondary">Nos Chatons à l'adoption 🍼</h2>
-            <div id="liste-chatons" class="row row-cols-1 row-cols-md-3 g-4">
-                </div>
+            <h2 class="text-center mb-5">Nos Petits Chatons</h2>
+            <div id="liste-chatons" class="row row-cols-1 row-cols-md-3 g-4"></div>
         </div>
     </section>
 
     <section id="contact" class="page-section">
-        <div class="container py-5">
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <div class="bg-white p-5 rounded-4 shadow text-center">
-                        <h2 class="mb-4">Nous Contacter 💌</h2>
-                        <p class="lead">Vous avez eu un coup de cœur ? Vous souhaitez devenir bénévole ?</p>
-                        <hr class="my-4">
-                        <p><strong>📍 Adresse :</strong> 12 Rue des Chats, 75000 Ville</p>
-                        <p><strong>📞 Téléphone :</strong> 01 23 45 67 89</p>
-                        <p><strong>📧 Email :</strong> contact@monasso.com</p>
-                        <br>
-                        <a href="mailto:contact@monasso.com" class="btn btn-asso btn-lg">Envoyer un email</a>
-                    </div>
-                </div>
+        <div class="container py-5 text-center">
+            <div class="col-md-6 mx-auto bg-light p-5 rounded-4">
+                <h2>Contactez-nous</h2>
+                <p>pastoucheauxminouches@gmail.com</p>
+                <a href="mailto:pastoucheauxminouches@gmail.com" class="btn btn-pink">Envoyer un message</a>
             </div>
         </div>
     </section>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         const pb = new PocketBase('/');
 
-        // Système de changement de page
         function changerPage(pageId) {
-            // Cacher toutes les sections
             document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
-            // Montrer la section demandée
             document.getElementById(pageId).classList.add('active');
-            // Fermer le menu mobile si ouvert
-            const navbar = document.querySelector('.navbar-collapse');
-            if (navbar.classList.contains('show')) {
-                new bootstrap.Collapse(navbar).hide();
-            }
+            window.scrollTo(0,0);
         }
 
-        // Fonction pour générer le HTML d'une carte
-        function creerCarte(chat) {
-            const photoUrl = chat.photos ? pb.files.getUrl(chat, chat.photos) : 'https://via.placeholder.com/300';
-            
-            // Le lien mailto pré-rempli
-            const mailSubject = `Adoption de ${chat.nom}`;
-            const mailBody = `Bonjour, je suis intéressé(e) par l'adoption de ${chat.nom}...`;
-            const mailLink = `mailto:contact@monasso.com?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;
-
-            return `
-                <div class="col">
-                    <div class="chat-card h-100">
-                        <img src="${photoUrl}" class="chat-img" alt="${chat.nom}">
-                        <div class="card-body text-center">
-                            <h3 class="fw-bold">${chat.nom}</h3>
-                            <span class="badge bg-info text-dark mb-3">${chat.age}</span>
-                            <p class="text-muted px-2">${chat.description}</p>
-                            <a href="${mailLink}" class="btn btn-asso w-100 mt-2">M'adopter ❤️</a>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-
-        // Chargement des données
         async function chargerAnimaux() {
             try {
                 const records = await pb.collection('chats').getFullList({ sort: '-created' });
-                
-                const containerAdultes = document.getElementById('liste-adultes');
-                const containerChatons = document.getElementById('liste-chatons');
+                const contAdultes = document.getElementById('liste-adultes');
+                const contChatons = document.getElementById('liste-chatons');
 
-                containerAdultes.innerHTML = '';
-                containerChatons.innerHTML = '';
-
-                let nbAdultes = 0;
-                let nbChatons = 0;
+                contAdultes.innerHTML = ''; contChatons.innerHTML = '';
 
                 records.forEach(chat => {
-                    const html = creerCarte(chat);
-                    
-                    // Si la case "est_chaton" est cochée dans PocketBase
-                    if (chat.est_chaton) {
-                        containerChatons.innerHTML += html;
-                        nbChatons++;
-                    } else {
-                        containerAdultes.innerHTML += html;
-                        nbAdultes++;
-                    }
+                    const photoUrl = chat.photos ? pb.files.getUrl(chat, chat.photos) : '';
+                    const html = `
+                        <div class="col">
+                            <div class="chat-card shadow-sm h-100">
+                                <img src="${photoUrl}" class="chat-img">
+                                <div class="p-4 text-center">
+                                    <h4 class="fw-bold">${chat.nom}</h4>
+                                    <p class="text-muted">${chat.age}</p>
+                                    <a href="mailto:pastoucheauxminouches@gmail.com" class="btn btn-outline-custom w-100">M'adopter</a>
+                                </div>
+                            </div>
+                        </div>`;
+                    if (chat.est_chaton) contChatons.innerHTML += html;
+                    else contAdultes.innerHTML += html;
                 });
-
-                if(nbAdultes === 0) containerAdultes.innerHTML = "<p class='text-center'>Aucun chat adulte pour le moment.</p>";
-                if(nbChatons === 0) containerChatons.innerHTML = "<p class='text-center'>Aucun chaton pour le moment.</p>";
-
-            } catch (err) {
-                console.error(err);
-            }
+            } catch (err) { console.error(err); }
         }
-
-        // Lancement au démarrage
         chargerAnimaux();
     </script>
 </body>
