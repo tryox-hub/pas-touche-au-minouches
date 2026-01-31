@@ -33,8 +33,9 @@
         .btn-arrondi:hover { background-color: #ff5c8a; transform: scale(1.05); color: white; }
 
         /* CARTES CHATS */
-        .chat-card { background: white; border-radius: 35px; padding: 15px; border: 2px solid var(--rose-tendre); transition: 0.3s; height: 100%; }
+        .chat-card { background: white; border-radius: 35px; padding: 15px; border: 2px solid var(--rose-tendre); transition: 0.3s; height: 100%; display: flex; flex-direction: column; }
         .chat-img-circle { height: 280px; width: 100%; object-fit: cover; border-radius: 25px; margin-bottom: 15px; }
+        .chat-desc { font-size: 0.95rem; color: #636e72; margin-bottom: 20px; flex-grow: 1; }
 
         footer { background: #f8f9fa; padding: 40px 0; margin-top: 60px; border-top: 2px solid var(--rose-tendre); font-size: 0.9rem; }
         
@@ -101,11 +102,6 @@
                     <img src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=800" class="img-rounded">
                 </div>
             </div>
-
-            <div class="text-center py-5">
-                <h2 style="font-size: 2.2rem;">Adoptez, ne lâchez jamais.</h2>
-                <button class="btn-arrondi mt-4" onclick="changerPage('chats')">Découvrir les chats</button>
-            </div>
         </div>
     </section>
 
@@ -137,7 +133,6 @@
         <div class="container text-center">
             <p class="fw-bold">Pas touche aux Minouches - Association Loi 1901</p>
             <p class="mb-0">RNA : [Ton Numéro] | Siège social : [Ton Adresse]</p>
-            <p class="small text-muted mt-2">© 2024 - Site créé avec amour pour les chats</p>
         </div>
     </footer>
 
@@ -150,8 +145,6 @@
             document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
             window.scrollTo(0,0);
-
-            // Fermeture automatique du menu mobile
             const navbarCollapse = document.getElementById('navbarNav');
             const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
             if (bsCollapse) { bsCollapse.hide(); }
@@ -166,13 +159,23 @@
 
                 records.forEach(chat => {
                     const photoUrl = chat.photos ? pb.files.getUrl(chat, chat.photos) : '';
+                    
+                    // Gestion de l'âge (ajoute "ans" si c'est juste un chiffre)
+                    let ageAffichage = chat.age;
+                    if (!isNaN(ageAffichage)) {
+                        ageAffichage = ageAffichage + " ans";
+                    }
+
                     const html = `
                         <div class="col">
                             <div class="chat-card shadow-sm">
                                 <img src="${photoUrl}" class="chat-img-circle" alt="${chat.nom}">
-                                <div class="p-2">
-                                    <h3 class="fw-bold h4 mb-2">${chat.nom}</h3>
-                                    <p class="badge bg-light text-dark border mb-3">${chat.age}</p>
+                                <div class="p-2 d-flex flex-column h-100">
+                                    <h3 class="fw-bold h4 mb-1">${chat.nom}</h3>
+                                    <div class="mb-2">
+                                        <span class="badge bg-light text-dark border">${ageAffichage}</span>
+                                    </div>
+                                    <p class="chat-desc">${chat.description || 'Pas de description pour le moment.'}</p>
                                     <a href="mailto:pastoucheauxminouches@gmail.com?subject=Adoption de ${chat.nom}" 
                                        class="btn-arrondi btn-sm w-100 py-2">M'adopter ❤️</a>
                                 </div>
