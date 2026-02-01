@@ -80,8 +80,8 @@
                 <h2 class="display-5 fw-bold" style="color:var(--rose-accent)">Pas touche aux Minouches</h2>
                 <p class="fs-5 mb-4 text-muted">Nous sommes au service des chats blessés, malades ou abandonnés dans la Somme (80).</p>
                 <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
-                    <button class="btn-mignon" onclick="changerPage('chats')">Adopté chat 🐈</button>
-                    <button class="btn-mignon" onclick="changerPage('chats')">Adopté chaton 🐾</button>
+                    <button class="btn-mignon" onclick="changerPage('chats')">Adopter chat 🐈</button>
+                    <button class="btn-mignon" onclick="changerPage('chats')">Adopter chaton 🐾</button>
                 </div>
             </div>
             <div class="col-lg-6"><img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=800" class="img-fluid rounded-5 shadow"></div>
@@ -89,9 +89,9 @@
 
         <div class="row mb-5 text-center">
             <h2 class="mb-5" style="color:var(--rose-accent)">Le parcours de l'adoption</h2>
-            <div class="col-md-4 mb-3"><div class="step-card"><div class="step-icon"><i class="fas fa-search"></i></div><h4>1. Le Coup de Cœur</h4><p class="small">Consultez nos protégés en ligne ou sur nos réseaux sociaux.</p></div></div>
-            <div class="col-md-4 mb-3"><div class="step-card"><div class="step-icon"><i class="fas fa-file-signature"></i></div><h4>2. Le Questionnaire</h4><p class="small">Nous échangeons sur votre mode de vie et vos attentes.</p></div></div>
-            <div class="col-md-4 mb-3"><div class="step-card"><div class="step-icon"><i class="fas fa-home"></i></div><h4>3. La Rencontre</h4><p class="small">Rencontrez le minouche dans sa famille d'accueil.</p></div></div>
+            <div class="col-md-4 mb-3"><div class="step-card"><div class="step-icon"><i class="fas fa-search"></i></div><h4>1. Le Coup de Cœur</h4><p class="small">Trouvez votre futur compagnon en ligne.</p></div></div>
+            <div class="col-md-4 mb-3"><div class="step-card"><div class="step-icon"><i class="fas fa-file-signature"></i></div><h4>2. Le Questionnaire</h4><p class="small">Nous échangeons sur vos attentes.</p></div></div>
+            <div class="col-md-4 mb-3"><div class="step-card"><div class="step-icon"><i class="fas fa-home"></i></div><h4>3. La Rencontre</h4><p class="small">Rencontrez-le en famille d'accueil.</p></div></div>
         </div>
     </section>
 
@@ -109,7 +109,7 @@
     </section>
 
     <section id="chats" class="page-section">
-        <h2 class="text-center mb-5" style="color:var(--rose-accent)">Nos protégés en attente d'une famille</h2>
+        <h2 class="text-center mb-5" style="color:var(--rose-accent)">Nos protégés</h2>
         
         <h3 class="cat-title">🐾 Nos Chatons</h3>
         <div id="liste-chatons" class="row g-4 mb-5"></div>
@@ -132,7 +132,7 @@
             <form action="https://formsubmit.co/pastoucheauxminouches@gmail.com" method="POST">
                 <input type="text" name="name" class="form-control mb-3" placeholder="Nom" required>
                 <textarea name="message" class="form-control mb-3" rows="4" placeholder="Votre message..." required></textarea>
-                <button type="submit" class="btn-mignon w-100">Envoyer 🐾</button>
+                <button type="submit" class="btn-mignon w-100">Envoyer</button>
             </form>
         </div>
     </section>
@@ -172,7 +172,6 @@
             records.forEach(chat => {
                 const photoUrl = chat.photos ? pb.files.getUrl(chat, chat.photos) : 'https://via.placeholder.com/300';
                 
-                // On affiche Sexe, Age, Nom et Description
                 const cardHtml = `
                     <div class="col-md-4">
                         <div class="bento-card text-center">
@@ -187,7 +186,7 @@
                         </div>
                     </div>`;
 
-                // Tri par le champ est_chaton
+                // Utilise le champ est_chaton pour trier
                 if (chat.est_chaton === true) {
                     contChatons.innerHTML += cardHtml;
                 } else {
