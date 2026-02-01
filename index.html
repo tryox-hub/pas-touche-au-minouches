@@ -22,41 +22,29 @@
         body { font-family: 'Nunito', sans-serif; background-color: white; color: var(--texte); overflow-x: hidden; }
         .site-wrapper { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 15px; }
 
-        /* --- NAVIGATION & CURSEUR --- */
-        .nav-link, .navbar-brand, button, .social-links a, .footer-link { cursor: pointer !important; }
+        .nav-link, .navbar-brand, button, .social-links a { cursor: pointer !important; }
         .navbar-brand img { height: 90px; transition: transform 0.3s; }
-        .navbar-brand:hover img { transform: scale(1.05); }
 
-        /* --- EFFET CLIC BOUTON (BEAUTÉ) --- */
         .btn-mignon {
-            background-color: var(--rose-accent);
-            color: white !important; border: none; border-radius: 50px;
-            padding: 12px 25px; font-weight: 900; 
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 0px var(--rose-dark);
-            position: relative; top: 0; width: 100%; text-decoration: none; display: inline-block;
+            background-color: var(--rose-accent); color: white !important; border: none; border-radius: 50px;
+            padding: 12px 25px; font-weight: 900; transition: all 0.2s ease;
+            box-shadow: 0 4px 0px var(--rose-dark); position: relative; top: 0; width: 100%; text-decoration: none; display: inline-block;
         }
-        .btn-mignon:hover { background-color: #ff9fb0; transform: translateY(-2px); box-shadow: 0 6px 0px var(--rose-dark); }
-        .btn-mignon:active { top: 3px; box-shadow: 0 1px 0px var(--rose-dark); background-color: var(--rose-dark); }
-        @media (min-width: 768px) { .btn-mignon { width: auto; } }
+        .btn-mignon:hover { transform: translateY(-2px); box-shadow: 0 6px 0px var(--rose-dark); }
+        .btn-mignon:active { top: 3px; box-shadow: 0 1px 0px var(--rose-dark); }
 
-        /* --- CARTES BENTO --- */
-        .bento-card {
-            background: white; border: 2px solid var(--rose-bordure);
-            border-radius: 35px; padding: 30px; height: 100%; transition: transform 0.3s;
-        }
+        .bento-card { background: white; border: 2px solid var(--rose-bordure); border-radius: 35px; padding: 30px; height: 100%; transition: transform 0.3s; }
         .bento-card:hover { transform: translateY(-5px); border-color: var(--rose-accent); }
-        .chat-img-box { width: 100%; height: 260px; object-fit: cover; border-radius: 20px; margin-bottom: 15px; }
+        
+        .step-card { text-align: center; padding: 20px; border: 2px dashed var(--rose-bordure); border-radius: 30px; height: 100%; }
+        .step-icon { font-size: 2.5rem; color: var(--rose-accent); background: var(--rose-pale); width: 80px; height: 80px; line-height: 80px; border-radius: 50%; margin: 0 auto 15px; }
 
-        /* --- SECTIONS --- */
+        .stat-box { text-align: center; padding: 20px; background: var(--rose-pale); border-radius: 25px; }
+        .stat-number { font-size: 2.5rem; font-weight: 900; color: var(--rose-accent); display: block; }
+
         .page-section { display: none; padding: 40px 0; }
         .page-section.active { display: block; animation: fadeIn 0.5s; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* --- STATS & LEGAL --- */
-        .stat-box { text-align: center; padding: 20px; background: var(--rose-pale); border-radius: 25px; }
-        .stat-number { font-size: 2.5rem; font-weight: 900; color: var(--rose-accent); display: block; }
-        .legal-text { font-size: 0.95rem; line-height: 1.6; }
     </style>
 </head>
 <body>
@@ -65,7 +53,7 @@
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid p-0">
             <a class="navbar-brand" onclick="changerPage('accueil')">
-                <img src="https://raw.githubusercontent.com/tryox-hub/mon-asso-chats/main/logo.png" alt="Logo Pas touche aux Minouches">
+                <img src="https://raw.githubusercontent.com/tryox-hub/mon-asso-chats/main/logo.png" alt="Logo">
             </a>
             <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <i class="fas fa-bars" style="color: var(--rose-accent); font-size: 1.8rem;"></i>
@@ -73,12 +61,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto text-center fw-bold gap-3 align-items-center">
                     <li class="nav-item"><a class="nav-link" onclick="changerPage('accueil')">Accueil</a></li>
-                    <li class="nav-item"><a class="nav-link" onclick="changerPage('apropos')">À propos</a></li>
-                    <li class="nav-item"><a class="nav-link" onclick="changerPage('chats')">Adopter</a></li>
+                    <li class="nav-item"><a class="nav-link" onclick="changerPage('apropos')">À Propos</a></li>
+                    <li class="nav-item"><a class="nav-link" onclick="changerPage('chats')">Nos Chats</a></li>
                     <li class="nav-item"><a class="nav-link" onclick="changerPage('contact')">Contact</a></li>
-                    <li class="nav-item">
-                        <a class="nav-link btn-mignon text-white px-3 py-2 mt-2 mt-lg-0" onclick="changerPage('donations')" style="width:auto;">Faire un don ❤️</a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link btn-mignon px-3 py-2 text-white" onclick="changerPage('donations')">Faire un don ❤️</a></li>
                 </ul>
             </div>
         </div>
@@ -87,133 +73,96 @@
     <section id="accueil" class="page-section active">
         <div class="row align-items-center g-5 mb-5">
             <div class="col-lg-6 text-center text-lg-start">
-                <h2 class="display-5 fw-bold mb-4" style="color:var(--rose-accent)">Adoptez le bonheur, sauvez une vie !</h2>
-                <p class="fs-5 mb-4">Bienvenue chez <strong>Pas touche aux Minouches</strong>. Nous intervenons dans la Somme (80) pour soigner, identifier et protéger les chats oubliés.</p>
+                <h2 class="display-5 fw-bold" style="color:var(--rose-accent)">Adoptez le bonheur, sauvez une vie !</h2>
+                <p class="fs-5 mb-4">Bienvenue chez <strong>Pas touche aux Minouches</strong>. Nous offrons une seconde chance aux chats abandonnés dans la Somme (80).</p>
                 <div class="d-flex gap-3 justify-content-center justify-content-lg-start">
-                    <button class="btn-mignon" onclick="changerPage('chats')">Nos Minouches ❤️</button>
-                    <button class="btn-mignon" style="background:var(--rose-pale); color:var(--rose-accent) !important; box-shadow:none;" onclick="changerPage('donations')">Aider l'asso</button>
+                    <button class="btn-mignon" onclick="changerPage('chats')">Adopter ❤️</button>
+                    <button class="btn-mignon" style="background:var(--rose-pale); color:var(--rose-accent) !important; box-shadow:none;" onclick="changerPage('apropos')">Notre Mission</button>
                 </div>
             </div>
-            <div class="col-lg-6 text-center">
-                <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=800" class="img-fluid rounded-5 shadow" style="border: 8px solid var(--rose-pale)">
-            </div>
+            <div class="col-lg-6"><img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=800" class="img-fluid rounded-5 shadow" style="border: 8px solid var(--rose-pale)"></div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col-12 text-center mb-4"><h2>Comment adopter ?</h2></div>
+            <div class="col-md-4 mb-3"><div class="step-card"><div class="step-icon"><i class="fas fa-search"></i></div><h4>1. Repérez</h4><p class="small">Parcourez nos fiches et craquez pour une bouille d'amour.</p></div></div>
+            <div class="col-md-4 mb-3"><div class="step-card"><div class="step-icon"><i class="fas fa-envelope-open-text"></i></div><h4>2. Rencontrez</h4><p class="small">Contactez-nous pour organiser une visite avec la famille d'accueil.</p></div></div>
+            <div class="col-md-4 mb-3"><div class="step-card"><div class="step-icon"><i class="fas fa-home"></i></div><h4>3. Adoptez</h4><p class="small">Signez le contrat, et c'est parti pour la vie !</p></div></div>
         </div>
     </section>
 
     <section id="apropos" class="page-section">
         <div class="row align-items-center g-5 mb-5">
-            <div class="col-lg-6 order-2 order-lg-1">
-                <img src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=800" class="img-fluid rounded-5 shadow">
+            <div class="col-lg-6"><img src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=800" class="img-fluid rounded-5 shadow"></div>
+            <div class="col-lg-6">
+                <h2 style="color:var(--rose-accent)">Qui sommes-nous ?</h2>
+                <p>Née le <strong>9 avril 2024</strong>, notre association se bat contre la misère animale dans le département de la <strong>Somme (80)</strong>.</p>
+                <p><strong>SOIGNER - IDENTIFIER - STÉRILISER - AIMER</strong> : C'est notre mission quotidienne.</p>
             </div>
-            <div class="col-lg-6 order-1 order-lg-2">
-                <h2 style="color:var(--rose-accent)">Notre Mission 🐾</h2>
-                <p class="fs-5">Depuis le <strong>9 avril 2024</strong>, notre équipe se dévoue corps et âme à la protection animale dans le département de la Somme.</p>
-                <p><strong>Soigner, Identifier, Stériliser, Aimer</strong> : voilà les quatre piliers de notre combat quotidien contre la misère féline.</p>
-                <div class="row g-3 mt-3">
-                    <div class="col-6"><div class="stat-box"><span class="stat-number">80</span><span class="small fw-bold">Somme</span></div></div>
-                    <div class="col-6"><div class="stat-box"><span class="stat-number">2.5K</span><span class="small fw-bold">Abonnés</span></div></div>
-                </div>
+        </div>
+
+        <div class="row g-4 mb-5">
+            <div class="col-6 col-md-3"><div class="stat-box"><span class="stat-number">80</span><span class="small fw-bold">Département</span></div></div>
+            <div class="col-6 col-md-3"><div class="stat-box"><span class="stat-number">2024</span><span class="small fw-bold">Création</span></div></div>
+            <div class="col-6 col-md-3"><div class="stat-box"><span class="stat-number">2.5K</span><span class="small fw-bold">Abonnés</span></div></div>
+            <div class="col-6 col-md-3"><div class="stat-box"><span class="stat-number">∞</span><span class="small fw-bold">Amour</span></div></div>
+        </div>
+
+        <div class="bento-card"><h3 class="text-center mb-4">Nos Valeurs</h3>
+            <div class="row text-center">
+                <div class="col-md-4"><i class="fas fa-heart fa-2x text-rose mb-2"></i><h5>Bienveillance</h5><p class="small">Respect et douceur pour chaque animal.</p></div>
+                <div class="col-md-4"><i class="fas fa-shield-cat fa-2x text-rose mb-2"></i><h5>Protection</h5><p class="small">Lutte contre la maltraitance.</p></div>
+                <div class="col-md-4"><i class="fas fa-users fa-2x text-rose mb-2"></i><h5>Partage</h5><p class="small">L'humain et l'animal avancent ensemble.</p></div>
             </div>
         </div>
     </section>
 
     <section id="donations" class="page-section">
-        <div class="text-center mb-5">
-            <h2 style="color:var(--rose-accent)">Soutenez nos actions 💝</h2>
-            <p>Votre générosité est notre seul moteur pour payer les frais vétérinaires.</p>
-        </div>
+        <div class="text-center mb-5"><h2>Soutenez nos actions 💝</h2><p>SIREN : 927825497</p></div>
         <div class="row g-4">
-            <div class="col-md-6">
-                <div class="bento-card text-center">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/HelloAsso_Logo.svg/1200px-HelloAsso_Logo.svg.png" height="40" class="mb-3">
-                    <h4>Don HelloAsso</h4>
-                    <p class="small text-muted mb-4">La plateforme sécurisée pour les associations loi 1901.</p>
-                    <a href="METTRE_TON_LIEN_HELLO_ASSO" target="_blank" class="btn-mignon">Faire un don</a>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="bento-card text-center">
-                    <i class="fas fa-hand-holding-heart fa-3x mb-3" style="color:var(--rose-accent)"></i>
-                    <h4>Autre soutien</h4>
-                    <p class="small text-muted mb-4">PayPal ou autre plateforme de don.</p>
-                    <a href="METTRE_AUTRE_LIEN" target="_blank" class="btn-mignon" style="background:#5a4b4e;">Accéder au don</a>
-                </div>
-            </div>
+            <div class="col-md-6"><div class="bento-card text-center"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/HelloAsso_Logo.svg/1200px-HelloAsso_Logo.svg.png" height="40" class="mb-3"><h4>HelloAsso</h4><a href="TON_LIEN_ICI" class="btn-mignon">Donner</a></div></div>
+            <div class="col-md-6"><div class="bento-card text-center"><i class="fas fa-hand-holding-heart fa-3x mb-3" style="color:var(--rose-accent)"></i><h4>Autre plateforme</h4><a href="TON_LIEN_ICI" class="btn-mignon" style="background:#5a4b4e;">Accéder</a></div></div>
         </div>
     </section>
 
-    <section id="chats" class="page-section">
-        <h2 class="text-center mb-5" style="color:var(--rose-accent)">Nos Minouches à l'adoption</h2>
-        <div id="liste-chats" class="row g-4"></div>
-    </section>
+    <section id="chats" class="page-section"><h2 class="text-center mb-5">Nos Minouches 🐱</h2><div id="liste-chats" class="row g-4"></div></section>
 
     <section id="contact" class="page-section">
         <div class="row g-4">
-            <div class="col-lg-7">
-                <div class="bento-card">
-                    <h4 class="mb-4">Envoyez-nous un message</h4>
-                    <form action="https://formsubmit.co/pastoucheauxminouches@gmail.com" method="POST">
-                        <input type="hidden" name="_captcha" value="false">
-                        <input type="text" name="name" class="form-control mb-3 py-3 rounded-4 border-2" placeholder="Votre Prénom" required>
-                        <input type="email" name="email" class="form-control mb-3 py-3 rounded-4 border-2" placeholder="Votre Email" required>
-                        <textarea name="message" class="form-control mb-3 rounded-4 border-2" rows="5" placeholder="Votre message..." required></textarea>
-                        <button type="submit" class="btn-mignon w-100">Envoyer le message 🐾</button>
-                        <p class="mt-3 text-muted" style="font-size: 0.75rem;">* Vos données ne sont jamais partagées. Conformément au RGPD, vous pouvez demander leur suppression à tout moment.</p>
-                    </form>
-                </div>
-            </div>
-            <div class="col-lg-5">
-                <div class="bento-card text-center d-flex flex-column justify-content-center">
-                    <h4 class="fw-bold mb-4">Nous suivre</h4>
-                    <div class="d-flex justify-content-center gap-4">
-                        <a href="https://www.facebook.com/votre-page" target="_blank" class="text-primary"><i class="fab fa-facebook fa-4x"></i></a>
-                        <a href="#" target="_blank" class="text-danger"><i class="fab fa-instagram fa-4x"></i></a>
-                    </div>
-                    <p class="mt-4 small fw-bold">2 500 followers nous soutiennent déjà !</p>
-                </div>
-            </div>
+            <div class="col-lg-7"><div class="bento-card"><h4>Envoyez-nous un message</h4>
+                <form action="https://formsubmit.co/pastoucheauxminouches@gmail.com" method="POST">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="text" name="name" class="form-control mb-3" placeholder="Votre Prénom" required>
+                    <input type="email" name="email" class="form-control mb-3" placeholder="Votre Email" required>
+                    <textarea name="message" class="form-control mb-3" rows="5" placeholder="Votre message..." required></textarea>
+                    <button type="submit" class="btn-mignon w-100">Envoyer 🐾</button>
+                </form></div></div>
+            <div class="col-lg-5 text-center"><div class="bento-card"><h4>Suivez-nous</h4><a href="TON_LIEN_FACEBOOK" target="_blank" class="text-primary"><i class="fab fa-facebook fa-4x mt-4"></i></a><p class="mt-3">Rejoignez nos 2 500 abonnés !</p></div></div>
         </div>
     </section>
 
     <section id="mentions" class="page-section">
-        <div class="bento-card legal-text">
-            <h2 class="mb-4" style="color:var(--rose-accent)">Mentions Légales</h2>
-            <div class="row">
-                <div class="col-md-6">
-                    <h5>L'Association</h5>
-                    <p><strong>Pas touche aux Minouches</strong><br>
-                    Association Loi 1901 à but non lucratif<br>
-                    Date de création : 09/04/2024<br>
-                    RNA : <strong>W802018780</strong><br>
-                    SIREN : <strong>927825497</strong><br>
-                    SIRET : 92782549700013</p>
-                </div>
-                <div class="col-md-6">
-                    <h5>Hébergement</h5>
-                    <p>Ce site est hébergé par :<br>
-                    <strong>GitHub Inc.</strong><br>
-                    88 Colin P. Kelly Jr. Street<br>
-                    San Francisco, CA 94107, USA</p>
-                </div>
-            </div>
-            <button class="btn-mignon mt-3" onclick="changerPage('accueil')">Retour à l'accueil</button>
+        <div class="bento-card small text-muted">
+            <h2>Mentions Légales</h2>
+            <p><strong>Association :</strong> Pas touche aux Minouches.<br>
+            <strong>Siège :</strong> Somme (80), France.<br>
+            <strong>RNA :</strong> W802018780 | <strong>SIREN :</strong> 927825497.<br>
+            <strong>SIRET :</strong> 92782549700013.<br>
+            <strong>Hébergeur :</strong> GitHub Inc., San Francisco, USA.</p>
+            <button class="btn-mignon mt-3" onclick="changerPage('accueil')">Retour</button>
         </div>
     </section>
 
     <footer class="text-center py-5 border-top mt-5">
         <p class="mb-1 fw-bold">© 2026 Pas touche aux Minouches</p>
-        <p class="small text-muted mb-3">W802018780 | SIREN 927825497 | Somme (80)</p>
-        <div class="mt-3">
-            <a onclick="changerPage('mentions')" class="footer-link text-decoration-none text-muted small me-3">Mentions Légales</a>
-            <a onclick="changerPage('contact')" class="footer-link text-decoration-none text-muted small">Contact</a>
-        </div>
+        <p class="small text-muted mb-3">RNA : W802018780 | SIREN : 927825497</p>
+        <div><a onclick="changerPage('mentions')" class="text-decoration-none text-muted small me-3" style="cursor:pointer">Mentions Légales</a><a onclick="changerPage('contact')" class="text-decoration-none text-muted small" style="cursor:pointer">Contact</a></div>
     </footer>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     const pb = new PocketBase('/');
-
     function changerPage(pageId) {
         document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
         document.getElementById(pageId).classList.add('active');
@@ -221,27 +170,14 @@
         const nav = document.getElementById('navbarNav');
         if(nav.classList.contains('show')) { new bootstrap.Collapse(nav).hide(); }
     }
-
     async function chargerAnimaux() {
         try {
             const records = await pb.collection('chats').getFullList({ sort: '-created' });
             const cont = document.getElementById('liste-chats');
             cont.innerHTML = '';
-            if(records.length === 0) {
-                cont.innerHTML = '<p class="text-center">Nos minouches arrivent bientôt !</p>';
-                return;
-            }
             records.forEach(chat => {
                 const photoUrl = chat.photos ? pb.files.getUrl(chat, chat.photos) : 'https://via.placeholder.com/300';
-                cont.innerHTML += `
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="bento-card">
-                            <img src="${photoUrl}" class="chat-img-box">
-                            <h4 class="fw-bold">${chat.nom}</h4>
-                            <p class="small text-muted flex-grow-1">${chat.description || ''}</p>
-                            <button class="btn-mignon mt-3" onclick="window.location.href='mailto:pastoucheauxminouches@gmail.com?subject=Adoption ${chat.nom}'">M'adopter ❤️</button>
-                        </div>
-                    </div>`;
+                cont.innerHTML += `<div class="col-md-4"><div class="bento-card text-center"><img src="${photoUrl}" style="width:100%; height:200px; object-fit:cover; border-radius:20px" class="mb-3"><h4>${chat.nom}</h4><button class="btn-mignon mt-2" onclick="window.location.href='mailto:pastoucheauxminouches@gmail.com?subject=Adoption ${chat.nom}'">M'adopter</button></div></div>`;
             });
         } catch (err) { console.error(err); }
     }
