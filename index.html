@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Pas touche aux Minouches 🐾</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -22,72 +22,102 @@
             font-family: 'Nunito', sans-serif; 
             background-color: white; 
             color: var(--texte);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Empêche le défilement horizontal sur tel */
         }
 
-        .site-wrapper { max-width: 1300px; margin: 0 auto; }
+        /* --- CONTENEUR RESPONSIVE --- */
+        .site-wrapper { 
+            width: 100%;
+            max-width: 1200px; 
+            margin: 0 auto;
+            padding: 0 15px; /* Petite marge de sécurité sur mobile */
+        }
 
         /* --- NAVIGATION --- */
-        .navbar { padding: 30px 0; }
-        .navbar-brand img { height: 100px; }
-        .nav-link { font-weight: 800; color: var(--texte) !important; cursor: pointer; margin: 0 10px; }
-        .nav-link:hover { color: var(--rose-accent) !important; }
-
-        /* --- DESIGN BLOCS --- */
+        .navbar { padding: 15px 0; }
+        .navbar-brand img { height: 80px; width: auto; }
+        
+        /* --- DESIGN BLOCS BENTO --- */
         .bento-card {
             background: white;
             border: 2px solid var(--rose-bordure);
-            border-radius: 40px;
-            padding: 35px;
+            border-radius: 30px; /* Un peu moins arrondi pour gagner de la place sur tel */
+            padding: 20px;
             height: 100%;
             transition: 0.3s;
+            display: flex;
+            flex-direction: column;
         }
-        .img-da { width: 100%; border-radius: 40px; border: 10px solid var(--rose-pale); }
 
-        /* --- FORMULAIRE --- */
-        .form-control {
+        .img-da { 
+            width: 100%; 
+            height: auto;
+            border-radius: 25px; 
+            border: 6px solid var(--rose-pale); 
+        }
+
+        /* --- CHATS CARDS --- */
+        .chat-img-box {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
             border-radius: 20px;
-            border: 2px solid var(--rose-pale);
-            padding: 12px 20px;
             margin-bottom: 15px;
         }
-        .form-control:focus { border-color: var(--rose-accent); box-shadow: none; }
 
-        /* --- BOUTONS & BADGES --- */
+        /* --- FORMULAIRE OPTIMISÉ --- */
+        .form-control {
+            border-radius: 15px;
+            border: 2px solid var(--rose-pale);
+            padding: 10px 15px;
+            font-size: 16px; /* Évite le zoom auto sur iPhone */
+        }
+
+        /* --- BOUTONS --- */
         .btn-mignon {
             background-color: var(--rose-accent);
             color: white; border: none; border-radius: 50px;
-            padding: 12px 30px; font-weight: 900; transition: 0.3s;
+            padding: 12px 25px; font-weight: 900; transition: 0.3s;
+            width: 100%; /* Boutons pleine largeur sur mobile */
         }
-        .btn-mignon:hover { background-color: #ff7586; color: white; transform: scale(1.05); }
-        .age-badge { background: var(--rose-pale); color: var(--rose-accent); padding: 5px 15px; border-radius: 50px; font-weight: 800; margin-bottom: 10px; display: inline-block; }
+        @media (min-width: 768px) {
+            .btn-mignon { width: auto; }
+        }
 
-        /* --- SOCIAL & FOOTER --- */
+        /* --- SECTIONS --- */
+        .page-section { display: none; padding: 30px 0; }
+        .page-section.active { display: block; }
+        h2 { font-weight: 900; color: var(--rose-accent); font-size: 1.8rem; margin-bottom: 20px; }
+
+        @media (min-width: 768px) {
+            h2 { font-size: 2.5rem; }
+            .navbar-brand img { height: 100px; }
+            .bento-card { padding: 35px; border-radius: 40px; }
+        }
+
+        /* --- FOOTER SOCIAL --- */
         .social-links a {
             color: var(--rose-accent);
-            font-size: 1.8rem;
-            margin: 0 15px;
-            transition: 0.3s;
+            font-size: 1.5rem;
+            margin: 0 10px;
         }
-        .social-links a:hover { color: #ff7586; transform: translateY(-3px); }
-
-        .page-section { display: none; padding: 40px 20px; }
-        .page-section.active { display: block; animation: fadeIn 0.6s; }
-        h2 { font-weight: 900; color: var(--rose-accent); font-size: 2.2rem; margin-bottom: 20px; }
-
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
 
 <div class="site-wrapper">
     <nav class="navbar navbar-expand-lg">
-        <div class="container">
-            <a class="navbar-brand" onclick="changerPage('accueil')">
-                <img src="https://raw.githubusercontent.com/tryox-hub/mon-asso-chats/main/logo.png" style="cursor:pointer">
+        <div class="container-fluid p-0">
+            <a class="navbar-brand" onclick="changerPage('accueil')" style="cursor:pointer">
+                <img src="https://raw.githubusercontent.com/tryox-hub/mon-asso-chats/main/logo.png" alt="Logo">
             </a>
-            <button class="navbar-toggler border-0" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fas fa-bars" style="color: var(--rose-accent); font-size: 1.5rem;"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto text-center pt-3 pt-lg-0">
                     <li class="nav-item"><a class="nav-link" onclick="changerPage('accueil')">Accueil</a></li>
                     <li class="nav-item"><a class="nav-link" onclick="changerPage('apropos')">À propos</a></li>
                     <li class="nav-item"><a class="nav-link" onclick="changerPage('chats')">Nos Chats</a></li>
@@ -99,73 +129,70 @@
     </nav>
 
     <section id="accueil" class="page-section active">
-        <div class="row align-items-center mb-5">
-            <div class="col-md-6">
+        <div class="row align-items-center g-4">
+            <div class="col-lg-6 text-center text-lg-start">
                 <h2>Adoptez le bonheur, sauve de vie !</h2>
-                <p class="fs-5">Trouvez votre futur compagnon et offrez-lui la vie qu'il mérite. Chaque adoption libère une place pour un nouveau sauvetage.</p>
+                <p class="fs-5">Offrez une seconde chance à nos minouches. Chaque adoption est un acte d'amour qui sauve deux vies.</p>
                 <button class="btn-mignon mt-3" onclick="changerPage('chats')">Voir nos Minouches ❤️</button>
             </div>
-            <div class="col-md-6"><img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=800" class="img-da"></div>
+            <div class="col-lg-6">
+                <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=800" class="img-da">
+            </div>
         </div>
     </section>
 
     <section id="apropos" class="page-section">
-        <div class="row align-items-center">
-            <div class="col-md-6"><img src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=800" class="img-da"></div>
-            <div class="col-md-6 ps-md-5">
+        <div class="row align-items-center g-4">
+            <div class="col-lg-6 order-2 order-lg-1">
+                <img src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=800" class="img-da">
+            </div>
+            <div class="col-lg-6 order-1 order-lg-2 text-center text-lg-start">
                 <h2>À propos de nous</h2>
-                <p class="fs-5">"Pas touche aux Minouches" est une association née d'une passion commune : la protection des félins les plus vulnérables.</p>
-                <p>Depuis notre création, nous oeuvrons pour la stérilisation des chats errants, les soins vétérinaires d'urgence et le placement en famille d'accueil. Notre but est de transformer des destins brisés en histoires d'amour.</p>
-                <div class="bento-card mt-4" style="background:var(--rose-pale); border:none">
-                    <h4 class="fw-bold">Notre équipe</h4>
-                    <p class="mb-0 small">Une équipe de bénévoles dévoués et de familles d'accueil formidables qui travaillent 7j/7 pour le bien-être animal.</p>
-                </div>
+                <p><strong>Pas touche aux Minouches</strong> est une association dédiée à la protection et au sauvetage des félins.</p>
+                <p>Nous soignons, stérilisons et trouvons des familles pour la vie. Notre équipe est composée de bénévoles passionnés.</p>
             </div>
         </div>
     </section>
 
-    <section id="chats" class="page-section"><h2 class="text-center mb-5">Nos Minouches Adultes 🐱</h2><div id="liste-adultes" class="row row-cols-1 row-cols-md-3 g-4"></div></section>
-    <section id="chatons" class="page-section"><h2 class="text-center mb-5">Nos Petits Chatons 🍼</h2><div id="liste-chatons" class="row row-cols-1 row-cols-md-3 g-4"></div></section>
+    <section id="chats" class="page-section">
+        <h2 class="text-center mb-4">Nos Chats Adultes 🐱</h2>
+        <div id="liste-adultes" class="row g-4"></div>
+    </section>
+
+    <section id="chatons" class="page-section">
+        <h2 class="text-center mb-4">Nos Petits Chatons 🍼</h2>
+        <div id="liste-chatons" class="row g-4"></div>
+    </section>
 
     <section id="contact" class="page-section">
         <div class="row g-4">
-            <div class="col-md-5">
+            <div class="col-lg-5">
                 <div class="bento-card text-center">
-                    <h2>Nous contacter 💌</h2>
-                    <p>Une question ? Une envie d'adopter ou de devenir famille d'accueil ?</p>
-                    <p class="fw-bold mt-4">Email :</p>
-                    <p>pastoucheauxminouches@gmail.com</p>
-                    <div class="social-links mt-4">
+                    <h3>Contactez-nous 💌</h3>
+                    <p class="small">Une question ? Une envie d'adopter ?</p>
+                    <p class="fw-bold mt-3 mb-1">Email :</p>
+                    <p class="small">pastoucheauxminouches@gmail.com</p>
+                    <div class="social-links mt-3">
                         <a href="#"><i class="fab fa-facebook"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-tiktok"></i></a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-7">
+            <div class="col-lg-7">
                 <div class="bento-card">
-                    <h3 class="fw-bold mb-4">Envoyez-nous un message</h3>
                     <form id="contactForm">
-                        <div class="row">
-                            <div class="col-md-6"><input type="text" class="form-control" placeholder="Votre prénom" required></div>
-                            <div class="col-md-6"><input type="email" class="form-control" placeholder="Votre email" required></div>
-                        </div>
-                        <textarea class="form-control" rows="5" placeholder="Votre message..." required></textarea>
-                        <button type="submit" class="btn-mignon w-100">Envoyer mon message 🐾</button>
+                        <input type="text" class="form-control mb-3" placeholder="Votre prénom" required>
+                        <input type="email" class="form-control mb-3" placeholder="Votre email" required>
+                        <textarea class="form-control mb-3" rows="4" placeholder="Votre message..." required></textarea>
+                        <button type="submit" class="btn-mignon">Envoyer le message 🐾</button>
                     </form>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="text-center py-5 border-top mt-5">
-        <div class="social-links mb-3">
-            <a href="#"><i class="fab fa-facebook"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-tiktok"></i></a>
-        </div>
-        <p class="fw-bold mb-1">Pas touche aux Minouches</p>
-        <p class="small text-muted mb-0">Association Loi 1901 | Mentions légales</p>
+    <footer class="text-center py-4 mt-5 border-top">
+        <p class="small text-muted mb-0">© 2026 Pas touche aux Minouches | Association Loi 1901</p>
     </footer>
 </div>
 
@@ -177,6 +204,11 @@
         document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
         document.getElementById(pageId).classList.add('active');
         window.scrollTo(0,0);
+        
+        // Fermeture automatique du menu sur mobile après clic
+        const navbarCollapse = document.getElementById('navbarNav');
+        const bsCollapse = new bootstrap.Collapse(navbarCollapse, {toggle: false});
+        bsCollapse.hide();
     }
 
     async function chargerAnimaux() {
@@ -191,13 +223,13 @@
                 const ageText = chat.age + (chat.age && !isNaN(chat.age) ? " ans" : "");
 
                 const html = `
-                    <div class="col">
+                    <div class="col-12 col-md-6 col-lg-4">
                         <div class="bento-card">
-                            <img src="${photoUrl}" style="width:100%; height:250px; object-fit:cover; border-radius:25px; margin-bottom:15px">
-                            <div class="age-badge">${ageText}</div>
-                            <h3 class="fw-bold h4 mb-2">${chat.nom}</h3>
-                            <p class="text-muted small mb-3" style="min-height:45px">${chat.description || ''}</p>
-                            <button class="btn-mignon w-100" onclick="window.location.href='mailto:pastoucheauxminouches@gmail.com?subject=Adoption ${chat.nom}'">M'adopter ❤️</button>
+                            <img src="${photoUrl}" class="chat-img-box">
+                            <h4 class="fw-bold mb-1">${chat.nom}</h4>
+                            <span class="badge mb-3" style="background:var(--rose-pale); color:var(--rose-accent)">${ageText}</span>
+                            <p class="small flex-grow-1">${chat.description || ''}</p>
+                            <button class="btn-mignon mt-3" onclick="window.location.href='mailto:pastoucheauxminouches@gmail.com?subject=Adoption ${chat.nom}'">M'adopter ❤️</button>
                         </div>
                     </div>`;
                 if (chat.est_chaton) contChatons.innerHTML += html;
@@ -206,11 +238,6 @@
         } catch (err) { console.error(err); }
     }
     chargerAnimaux();
-
-    document.getElementById('contactForm').onsubmit = (e) => {
-        e.preventDefault();
-        alert('Merci ! Votre message a bien été préparé (simulation).');
-    };
 </script>
 </body>
 </html>
