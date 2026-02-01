@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -19,8 +20,18 @@
             --texte: #5a4b4e;
         }
 
-        body { font-family: 'Nunito', sans-serif; background-color: white; color: var(--texte); }
-        .site-wrapper { max-width: 1200px; margin: auto; padding: 0 15px; }
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: white;
+            color: var(--texte);
+            overflow-x: hidden;
+        }
+
+        .site-wrapper {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 15px;
+        }
 
         .btn-mignon {
             background-color: var(--rose-accent);
@@ -29,6 +40,7 @@
             border-radius: 50px;
             padding: 12px 25px;
             font-weight: 900;
+            box-shadow: 0 4px 0px var(--rose-dark);
             width: 100%;
         }
 
@@ -44,6 +56,7 @@
         .page-section.active { display: block; }
     </style>
 </head>
+
 <body>
 
 <div class="site-wrapper">
@@ -53,45 +66,64 @@
         <a class="navbar-brand" onclick="changerPage('accueil')">
             <img src="https://raw.githubusercontent.com/tryox-hub/mon-asso-chats/main/logo.png" height="90">
         </a>
+
         <div class="collapse navbar-collapse show">
-            <ul class="navbar-nav ms-auto fw-bold gap-3">
+            <ul class="navbar-nav ms-auto fw-bold gap-3 text-center">
                 <li class="nav-item"><a class="nav-link" onclick="changerPage('accueil')">Accueil</a></li>
                 <li class="nav-item"><a class="nav-link" onclick="changerPage('chats-adultes')">Chats</a></li>
                 <li class="nav-item"><a class="nav-link" onclick="changerPage('chatons')">Chatons</a></li>
-                <li class="nav-item"><a class="nav-link" onclick="changerPage('donations')">Faire un don ❤️</a></li>
+                <li class="nav-item">
+                    <a class="nav-link btn-mignon px-3 py-2 text-white"
+                       onclick="changerPage('donations')">Faire un don ❤️</a>
+                </li>
             </ul>
         </div>
     </div>
 </nav>
 
+<!-- ACCUEIL -->
 <section id="accueil" class="page-section active">
-    <h2 style="color:var(--rose-accent)">Bienvenue chez Pas touche aux Minouches 🐾</h2>
+    <h2 style="color:var(--rose-accent)">Donner une seconde chance aux minouches de la Somme.</h2>
 </section>
 
+<!-- DONATIONS -->
 <section id="donations" class="page-section">
-    <h2 class="text-center mb-5" style="color:var(--rose-accent)">Soutenez nos actions 💝</h2>
+    <div class="text-center mb-5">
+        <h2 style="color:var(--rose-accent)">Soutenez nos actions 💝</h2>
+    </div>
+
     <div class="row g-4">
         <div class="col-md-6">
             <div class="bento-card text-center">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/HelloAsso_Logo.svg/1200px-HelloAsso_Logo.svg.png"
+                     height="40" class="mb-3">
                 <h4>Don HelloAsso</h4>
-                <a href="TON_LIEN_HELLOASSO" class="btn-mignon" target="_blank">Donner sécurisé</a>
+                <a href="TON_LIEN_HELLOASSO" target="_blank" class="btn-mignon">Donner sécurisé</a>
             </div>
         </div>
+
+        <!-- TEAMING (remplace cagnotte) -->
         <div class="col-md-6">
             <div class="bento-card text-center">
+                <i class="fas fa-users fa-3x mb-3"></i>
                 <h4>Teaming</h4>
                 <p class="small text-muted">1€ par mois pour sauver des vies 🐾</p>
-                <a href="TON_LIEN_TEAMING" class="btn-mignon" style="background:#5a4b4e" target="_blank">Rejoindre Teaming</a>
+                <a href="TON_LIEN_TEAMING" target="_blank"
+                   class="btn-mignon" style="background:#5a4b4e">
+                    Rejoindre Teaming
+                </a>
             </div>
         </div>
     </div>
 </section>
 
+<!-- CHATS ADULTES -->
 <section id="chats-adultes" class="page-section">
     <h2 class="text-center mb-5" style="color:var(--rose-accent)">Chats adultes 🐱</h2>
     <div id="liste-chats-adultes" class="row g-4"></div>
 </section>
 
+<!-- CHATONS -->
 <section id="chatons" class="page-section">
     <h2 class="text-center mb-5" style="color:var(--rose-accent)">Chatons 🍼</h2>
     <div id="liste-chatons" class="row g-4"></div>
@@ -100,45 +132,54 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
-    const pb = new PocketBase('/');
+const pb = new PocketBase('/');
 
-    function changerPage(id) {
-        document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-        window.scrollTo(0,0);
-    }
+function changerPage(pageId) {
+    document.querySelectorAll('.page-section')
+        .forEach(el => el.classList.remove('active'));
+    document.getElementById(pageId).classList.add('active');
+    window.scrollTo(0, 0);
+}
 
-    async function chargerAnimaux() {
-        const records = await pb.collection('chats').getFullList({ sort: '-created' });
+async function chargerAnimaux() {
+    const records = await pb.collection('chats').getFullList({ sort: '-created' });
 
-        const adultes = document.getElementById('liste-chats-adultes');
-        const chatons = document.getElementById('liste-chatons');
+    const adultes = document.getElementById('liste-chats-adultes');
+    const chatons = document.getElementById('liste-chatons');
 
-        adultes.innerHTML = '';
-        chatons.innerHTML = '';
+    adultes.innerHTML = '';
+    chatons.innerHTML = '';
 
-        records.forEach(chat => {
-            const photo = chat.photos ? pb.files.getUrl(chat, chat.photos) : 'https://via.placeholder.com/300';
+    records.forEach(chat => {
+        const photoUrl = chat.photos
+            ? pb.files.getUrl(chat, chat.photos)
+            : 'https://via.placeholder.com/300';
 
-            const card = `
-            <div class="col-md-4">
-                <div class="bento-card text-center">
-                    <img src="${photo}" style="width:100%;height:200px;object-fit:cover;border-radius:20px" class="mb-3">
-                    <h4>${chat.nom}</h4>
-                    <button class="btn-mignon mt-2">M'adopter ❤️</button>
-                </div>
-            </div>`;
+        const card = `
+        <div class="col-md-4">
+            <div class="bento-card text-center">
+                <img src="${photoUrl}"
+                     style="width:100%; height:200px; object-fit:cover; border-radius:20px"
+                     class="mb-3">
+                <h4>${chat.nom}</h4>
+                <button class="btn-mignon mt-2"
+                    onclick="window.location.href='mailto:pastoucheauxminouches@gmail.com?subject=Adoption ${chat.nom}'">
+                    M'adopter ❤️
+                </button>
+            </div>
+        </div>`;
 
-            if (chat.categorie === 'chaton') {
-                chatons.innerHTML += card;
-            } else {
-                adultes.innerHTML += card;
-            }
-        });
-    }
+        if (chat.categorie === 'chaton') {
+            chatons.innerHTML += card;
+        } else {
+            adultes.innerHTML += card;
+        }
+    });
+}
 
-    chargerAnimaux();
+chargerAnimaux();
 </script>
 
 </body>
