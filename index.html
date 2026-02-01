@@ -28,62 +28,69 @@
 
         .site-wrapper { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 15px; }
 
-        /* --- NAVIGATION & CURSEURS --- */
-        .nav-link, .navbar-brand, button, .social-links a {
-            cursor: pointer !important;
-        }
-
+        /* --- STYLES GENERAUX --- */
+        .nav-link, .navbar-brand, button, .social-links a { cursor: pointer !important; }
         .navbar-brand img { height: 90px; transition: transform 0.3s; }
         .navbar-brand:hover img { transform: scale(1.05); }
 
-        /* --- EFFET CLIC BOUTON --- */
+        h2 { font-weight: 900; color: var(--rose-accent); margin-bottom: 1.5rem; }
+        .text-rose { color: var(--rose-accent); }
+
+        /* --- BOUTONS --- */
         .btn-mignon {
             background-color: var(--rose-accent);
             color: white; border: none; border-radius: 50px;
             padding: 12px 25px; font-weight: 900; 
             transition: all 0.2s ease;
             box-shadow: 0 4px 0px var(--rose-dark);
-            position: relative;
-            top: 0;
-            width: 100%;
+            position: relative; top: 0; width: 100%;
         }
         .btn-mignon:hover { background-color: #ff9fb0; transform: translateY(-2px); box-shadow: 0 6px 0px var(--rose-dark); color: white; }
-        .btn-mignon:active { 
-            top: 3px; 
-            box-shadow: 0 1px 0px var(--rose-dark);
-            background-color: var(--rose-dark);
-        }
-
+        .btn-mignon:active { top: 3px; box-shadow: 0 1px 0px var(--rose-dark); background-color: var(--rose-dark); }
         @media (min-width: 768px) { .btn-mignon { width: auto; } }
 
-        /* --- BENTO CARDS --- */
+        /* --- CARTES BENTO & IMAGES --- */
         .bento-card {
             background: white;
             border: 2px solid var(--rose-bordure);
             border-radius: 35px;
-            padding: 25px;
+            padding: 30px;
             height: 100%;
             transition: transform 0.3s;
         }
-        .bento-card:hover { transform: translateY(-5px); }
+        .bento-card:hover { transform: translateY(-5px); border-color: var(--rose-accent); }
 
         .img-da { width: 100%; border-radius: 25px; border: 6px solid var(--rose-pale); }
+        .chat-img-box { width: 100%; height: 260px; object-fit: cover; border-radius: 20px; margin-bottom: 15px; }
 
-        .chat-img-box {
-            width: 100%; height: 250px; object-fit: cover; border-radius: 20px; margin-bottom: 15px;
+        /* --- SECTION ETAPES (ACCUEIL) --- */
+        .step-card {
+            text-align: center; padding: 20px;
+            border: 2px dashed var(--rose-bordure); border-radius: 30px;
+            height: 100%;
         }
+        .step-icon {
+            font-size: 2.5rem; color: var(--rose-accent);
+            background: var(--rose-pale); width: 80px; height: 80px;
+            line-height: 80px; border-radius: 50%; margin: 0 auto 15px;
+        }
+
+        /* --- CHIFFRES CLES (A PROPOS) --- */
+        .stat-box {
+            text-align: center; padding: 20px;
+            background: var(--rose-pale); border-radius: 25px;
+        }
+        .stat-number { font-size: 2.5rem; font-weight: 900; color: var(--rose-accent); display: block; }
 
         /* --- FORMULAIRE --- */
         .form-control {
             border-radius: 15px; border: 2px solid var(--rose-pale); padding: 12px;
-            transition: border-color 0.3s;
+            font-size: 16px;
         }
         .form-control:focus { border-color: var(--rose-accent); box-shadow: none; }
 
-        .page-section { display: none; padding: 30px 0; }
-        .page-section.active { display: block; animation: fadeIn 0.4s; }
-        h2 { font-weight: 900; color: var(--rose-accent); }
-
+        .page-section { display: none; padding: 40px 0; }
+        .page-section.active { display: block; animation: fadeIn 0.5s; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
@@ -99,37 +106,142 @@
                 <i class="fas fa-bars" style="color: var(--rose-accent); font-size: 1.8rem;"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto text-center fw-bold">
-                    <li class="nav-item"><a class="nav-link px-3" onclick="changerPage('accueil')">Accueil</a></li>
-                    <li class="nav-item"><a class="nav-link px-3" onclick="changerPage('apropos')">À propos</a></li>
-                    <li class="nav-item"><a class="nav-link px-3" onclick="changerPage('chats')">Nos Chats</a></li>
-                    <li class="nav-item"><a class="nav-link px-3" onclick="changerPage('chatons')">Nos Chatons</a></li>
-                    <li class="nav-item"><a class="nav-link px-3" onclick="changerPage('contact')">Contact</a></li>
+                <ul class="navbar-nav ms-auto text-center fw-bold gap-3 align-items-center">
+                    <li class="nav-item"><a class="nav-link" onclick="changerPage('accueil')">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" onclick="changerPage('apropos')">À propos</a></li>
+                    <li class="nav-item"><a class="nav-link" onclick="changerPage('chats')">Nos Chats</a></li>
+                    <li class="nav-item"><a class="nav-link" onclick="changerPage('chatons')">Nos Chatons</a></li>
+                    <li class="nav-item"><a class="nav-link" onclick="changerPage('contact')">Contact</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link btn-mignon text-white px-3 py-2 mt-2 mt-lg-0" onclick="changerPage('donations')" style="width:auto; display:inline-block;">Faire un don ❤️</a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 
     <section id="accueil" class="page-section active">
-        <div class="row align-items-center g-5">
+        <div class="row align-items-center g-5 mb-5">
             <div class="col-lg-6 text-center text-lg-start">
-                <h2 class="display-5 mb-4">Adoptez le bonheur, sauve de vie !</h2>
-                <p class="fs-5 mb-4">Changez le destin d'un minouche. Chaque adoption est une victoire contre l'abandon.</p>
-                <button class="btn-mignon" onclick="changerPage('chats')">Nos Minouches ❤️</button>
+                <h2 class="display-5 mb-4">Adoptez le bonheur, sauvez une vie !</h2>
+                <p class="fs-5 mb-4 text-muted">Bienvenue chez Pas touche aux Minouches. Nous offrons une seconde chance aux chats abandonnés en leur trouvant des foyers aimants pour la vie.</p>
+                <div class="d-flex gap-3 justify-content-center justify-content-lg-start">
+                    <button class="btn-mignon" onclick="changerPage('chats')">Adopter ❤️</button>
+                    <button class="btn-mignon" style="background:var(--rose-pale); color:var(--rose-accent); box-shadow:none;" onclick="changerPage('apropos')">Nous découvrir</button>
+                </div>
             </div>
             <div class="col-lg-6">
                 <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=800" class="img-da shadow-sm">
             </div>
         </div>
+
+        <div class="row mb-5">
+            <div class="col-12 text-center mb-4">
+                <h2>Comment adopter ?</h2>
+                <p class="text-muted">Le parcours du cœur en 3 étapes simples</p>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="step-card">
+                    <div class="step-icon"><i class="fas fa-search"></i></div>
+                    <h4>1. Repérez</h4>
+                    <p class="small text-muted">Parcourez nos fiches et craquez pour une bouille d'amour.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="step-card">
+                    <div class="step-icon"><i class="fas fa-envelope-open-text"></i></div>
+                    <h4>2. Rencontrez</h4>
+                    <p class="small text-muted">Contactez-nous pour organiser une visite avec la famille d'accueil.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="step-card">
+                    <div class="step-icon"><i class="fas fa-home"></i></div>
+                    <h4>3. Adoptez</h4>
+                    <p class="small text-muted">Signez le contrat, préparez le canapé, et c'est parti pour la vie !</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-6">
+                <div class="bento-card d-flex align-items-center bg-rose-pale">
+                    <div class="me-3">
+                        <h3>Devenir Bénévole</h3>
+                        <p class="small text-muted">Vous avez du temps et de l'amour à donner ? Rejoignez notre équipe de choc !</p>
+                        <button class="btn-mignon" onclick="changerPage('contact')">Je participe 🙋‍♀️</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="bento-card d-flex align-items-center">
+                    <div class="me-3">
+                        <h3>Faire un don</h3>
+                        <p class="small text-muted">Les croquettes et les soins vétérinaires coûtent cher. Aidez-nous à les sauver.</p>
+                        <button class="btn-mignon" onclick="changerPage('donations')">Cagnotte 💖</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="donations" class="page-section">
+        <div class="text-center mb-5">
+            <h2>Soutenez nos actions 💝</h2>
+            <p class="fs-5 text-muted">Votre générosité sauve des vies. Chaque euro est utilisé pour soigner, nourrir et protéger nos minouches.</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="bento-card text-center d-flex flex-column align-items-center justify-content-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/HelloAsso_Logo.svg/1200px-HelloAsso_Logo.svg.png" style="max-width: 200px; margin-bottom: 20px;">
+                    <h4 class="mb-3">Don via HelloAsso</h4>
+                    <p class="text-muted mb-4">La plateforme 100% gratuite pour les associations. 100% de votre don nous revient.</p>
+                    <a href="LIEN_HELLO_ASSO_ICI" target="_blank" class="btn-mignon w-75">Faire un don sur HelloAsso</a>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="bento-card text-center d-flex flex-column align-items-center justify-content-center">
+                    <i class="fas fa-hand-holding-heart fa-4x text-rose mb-3"></i>
+                    <h4 class="mb-3">Autre moyen de don</h4>
+                    <p class="text-muted mb-4">Vous préférez utiliser une autre plateforme ? C'est par ici !</p>
+                    <a href="LIEN_AUTRE_SITE_ICI" target="_blank" class="btn-mignon w-75" style="background-color: #5a4b4e;">Accéder à l'autre site</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="bento-card mt-4 bg-rose-pale border-0 text-center">
+            <h5>💡 Le saviez-vous ?</h5>
+            <p class="mb-0 small">Vos dons sont déductibles des impôts à hauteur de 66%. Un don de 50€ ne vous coûte réellement que 17€.</p>
+        </div>
     </section>
 
     <section id="apropos" class="page-section">
-        <div class="row align-items-center g-5">
-            <div class="col-lg-6"><img src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=800" class="img-da"></div>
-            <div class="col-lg-6">
-                <h2 class="mb-4">À propos de nous</h2>
-                <p class="fs-5">Nous sommes une équipe de passionnés qui dédient leur temps à la protection animale.</p>
-                <p>Notre mission : Stériliser, soigner et trouver la famille parfaite pour chaque chat qui croise notre route.</p>
+        <div class="row align-items-center g-5 mb-5">
+            <div class="col-lg-6 order-2 order-lg-1">
+                <img src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=800" class="img-da">
+            </div>
+            <div class="col-lg-6 order-1 order-lg-2">
+                <h2>Qui sommes-nous ?</h2>
+                <p class="fs-5"><strong>Pas touche aux Minouches</strong> est bien plus qu'une association : c'est une grande famille.</p>
+                <p>Née de la volonté de protéger les chats errants de notre région, nous nous battons chaque jour contre la misère animale. Nous fonctionnons uniquement grâce à des familles d'accueil dévouées.</p>
+            </div>
+        </div>
+
+        <div class="row g-4 mb-5">
+            <div class="col-6 col-md-3"><div class="stat-box"><span class="stat-number">150+</span><span class="small fw-bold">Chats sauvés</span></div></div>
+            <div class="col-6 col-md-3"><div class="stat-box"><span class="stat-number">45</span><span class="small fw-bold">Adoptions</span></div></div>
+            <div class="col-6 col-md-3"><div class="stat-box"><span class="stat-number">12</span><span class="small fw-bold">Bénévoles</span></div></div>
+            <div class="col-6 col-md-3"><div class="stat-box"><span class="stat-number">∞</span><span class="small fw-bold">Amour</span></div></div>
+        </div>
+
+        <div class="bento-card">
+            <h3 class="text-center mb-4">Nos Valeurs</h3>
+            <div class="row text-center">
+                <div class="col-md-4 mb-3"><i class="fas fa-heart fa-2x text-rose mb-2"></i><h5>Bienveillance</h5></div>
+                <div class="col-md-4 mb-3"><i class="fas fa-shield-cat fa-2x text-rose mb-2"></i><h5>Protection</h5></div>
+                <div class="col-md-4 mb-3"><i class="fas fa-users fa-2x text-rose mb-2"></i><h5>Partage</h5></div>
             </div>
         </div>
     </section>
@@ -140,23 +252,38 @@
     <section id="contact" class="page-section">
         <div class="row g-4">
             <div class="col-lg-5">
-                <div class="bento-card text-center">
-                    <h3 class="fw-bold mb-3">Contact 💌</h3>
-                    <p>Une question ? Écrivez-nous !</p>
-                    <p class="fw-bold text-pink">pastoucheauxminouches@gmail.com</p>
+                <div class="bento-card text-center d-flex flex-column justify-content-center">
+                    <h3 class="fw-bold mb-3">Restons en contact 💌</h3>
+                    <p>Une question sur une adoption ? Envie d'aider ?</p>
+                    <div class="mt-4"><p class="fw-bold text-rose mb-0">Notre Email :</p><p>pastoucheauxminouches@gmail.com</p></div>
                     <div class="social-links mt-4">
-                        <a href="#" class="mx-2"><i class="fab fa-facebook fa-2x"></i></a>
-                        <a href="#" class="mx-2"><i class="fab fa-instagram fa-2x"></i></a>
+                        <a href="#"><i class="fab fa-facebook fa-2x"></i></a>
+                        <a href="#"><i class="fab fa-instagram fa-2x"></i></a>
+                        <a href="#"><i class="fab fa-tiktok fa-2x"></i></a>
                     </div>
                 </div>
             </div>
+            
             <div class="col-lg-7">
                 <div class="bento-card">
-                    <form id="monFormulaire">
-                        <input type="text" id="prenom" class="form-control mb-3" placeholder="Votre prénom" required>
-                        <input type="email" id="email" class="form-control mb-3" placeholder="Votre email" required>
-                        <textarea id="message" class="form-control mb-3" rows="4" placeholder="Votre message..." required></textarea>
-                        <button type="submit" class="btn-mignon">Envoyer à l'association 🐾</button>
+                    <h4 class="mb-4">Envoyez-nous un message</h4>
+                    <form action="https://formsubmit.co/pastoucheauxminouches@gmail.com" method="POST">
+                        <input type="hidden" name="_next" value=""> 
+                        <input type="text" name="_honey" style="display:none">
+                        <input type="hidden" name="_captcha" value="false">
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold ms-2">Votre Prénom</label>
+                            <input type="text" name="name" class="form-control" placeholder="Ex: Julie" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold ms-2">Votre Email</label>
+                            <input type="email" name="email" class="form-control" placeholder="Ex: julie@email.com" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold ms-2">Votre Message</label>
+                            <textarea name="message" class="form-control" rows="5" placeholder="Bonjour..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn-mignon w-100">Envoyer mon message 🐾</button>
                     </form>
                 </div>
             </div>
@@ -164,7 +291,7 @@
     </section>
 
     <footer class="text-center py-5 border-top mt-5">
-        <p class="small text-muted">© 2026 Pas touche aux Minouches | Sauvetage & Amour</p>
+        <p class="small text-muted">© 2026 Pas touche aux Minouches | Fait avec ❤️ pour les chats</p>
     </footer>
 </div>
 
@@ -180,15 +307,6 @@
         if(nav.classList.contains('show')) { new bootstrap.Collapse(nav).hide(); }
     }
 
-    // GESTION DU FORMULAIRE (Envoi par mail direct)
-    document.getElementById('monFormulaire').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const prenom = document.getElementById('prenom').value;
-        const message = document.getElementById('message').value;
-        const mailtoLink = `mailto:pastoucheauxminouches@gmail.com?subject=Message de ${prenom}&body=${encodeURIComponent(message)}`;
-        window.location.href = mailtoLink;
-    });
-
     async function chargerAnimaux() {
         try {
             const records = await pb.collection('chats').getFullList({ sort: '-created' });
@@ -197,21 +315,28 @@
             contA.innerHTML = ''; contC.innerHTML = '';
 
             records.forEach(chat => {
-                const photoUrl = chat.photos ? pb.files.getUrl(chat, chat.photos) : '';
+                const photoUrl = chat.photos ? pb.files.getUrl(chat, chat.photos) : 'https://via.placeholder.com/300?text=Photo+à+venir';
                 const ageText = chat.age + (chat.age && !isNaN(chat.age) ? " ans" : "");
-                const card = `
+                
+                const html = `
                     <div class="col-12 col-md-6 col-lg-4">
-                        <div class="bento-card">
-                            <img src="${photoUrl}" class="chat-img-box">
-                            <h4 class="fw-bold">${chat.nom}</h4>
-                            <span class="badge mb-2" style="background:var(--rose-pale); color:var(--rose-accent)">${ageText}</span>
-                            <p class="small flex-grow-1">${chat.description || ''}</p>
+                        <div class="bento-card d-flex flex-column">
+                            <img src="${photoUrl}" class="chat-img-box" alt="${chat.nom}">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h4 class="fw-bold mb-0">${chat.nom}</h4>
+                                <span class="badge" style="background:var(--rose-pale); color:var(--rose-accent)">${ageText}</span>
+                            </div>
+                            <p class="small text-muted flex-grow-1">${chat.description || 'Un amour de chat à découvrir.'}</p>
                             <button class="btn-mignon mt-3" onclick="window.location.href='mailto:pastoucheauxminouches@gmail.com?subject=Adoption ${chat.nom}'">M'adopter ❤️</button>
                         </div>
                     </div>`;
-                if (chat.est_chaton) contC.innerHTML += card; else contA.innerHTML += card;
+                
+                if (chat.est_chaton) contC.innerHTML += html; else contA.innerHTML += html;
             });
-        } catch (err) { console.error(err); }
+        } catch (err) { 
+            console.error(err);
+            document.getElementById('liste-adultes').innerHTML = '<p class="text-center w-100">Chargement des minouches...</p>';
+        }
     }
     chargerAnimaux();
 </script>
