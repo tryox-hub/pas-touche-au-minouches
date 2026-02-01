@@ -14,6 +14,7 @@
         :root { 
             --rose-pale: #fdf2f5; 
             --rose-accent: #ff8e9d; 
+            --rose-dark: #ef7a89;
             --rose-bordure: #ffe0e6; 
             --texte: #5a4b4e;
         }
@@ -22,87 +23,68 @@
             font-family: 'Nunito', sans-serif; 
             background-color: white; 
             color: var(--texte);
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden; /* Empêche le défilement horizontal sur tel */
+            overflow-x: hidden;
         }
 
-        /* --- CONTENEUR RESPONSIVE --- */
-        .site-wrapper { 
-            width: 100%;
-            max-width: 1200px; 
-            margin: 0 auto;
-            padding: 0 15px; /* Petite marge de sécurité sur mobile */
+        .site-wrapper { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 15px; }
+
+        /* --- NAVIGATION & CURSEURS --- */
+        .nav-link, .navbar-brand, button, .social-links a {
+            cursor: pointer !important;
         }
 
-        /* --- NAVIGATION --- */
-        .navbar { padding: 15px 0; }
-        .navbar-brand img { height: 80px; width: auto; }
-        
-        /* --- DESIGN BLOCS BENTO --- */
-        .bento-card {
-            background: white;
-            border: 2px solid var(--rose-bordure);
-            border-radius: 30px; /* Un peu moins arrondi pour gagner de la place sur tel */
-            padding: 20px;
-            height: 100%;
-            transition: 0.3s;
-            display: flex;
-            flex-direction: column;
-        }
+        .navbar-brand img { height: 90px; transition: transform 0.3s; }
+        .navbar-brand:hover img { transform: scale(1.05); }
 
-        .img-da { 
-            width: 100%; 
-            height: auto;
-            border-radius: 25px; 
-            border: 6px solid var(--rose-pale); 
-        }
-
-        /* --- CHATS CARDS --- */
-        .chat-img-box {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            border-radius: 20px;
-            margin-bottom: 15px;
-        }
-
-        /* --- FORMULAIRE OPTIMISÉ --- */
-        .form-control {
-            border-radius: 15px;
-            border: 2px solid var(--rose-pale);
-            padding: 10px 15px;
-            font-size: 16px; /* Évite le zoom auto sur iPhone */
-        }
-
-        /* --- BOUTONS --- */
+        /* --- EFFET CLIC BOUTON --- */
         .btn-mignon {
             background-color: var(--rose-accent);
             color: white; border: none; border-radius: 50px;
-            padding: 12px 25px; font-weight: 900; transition: 0.3s;
-            width: 100%; /* Boutons pleine largeur sur mobile */
+            padding: 12px 25px; font-weight: 900; 
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 0px var(--rose-dark);
+            position: relative;
+            top: 0;
+            width: 100%;
         }
-        @media (min-width: 768px) {
-            .btn-mignon { width: auto; }
+        .btn-mignon:hover { background-color: #ff9fb0; transform: translateY(-2px); box-shadow: 0 6px 0px var(--rose-dark); color: white; }
+        .btn-mignon:active { 
+            top: 3px; 
+            box-shadow: 0 1px 0px var(--rose-dark);
+            background-color: var(--rose-dark);
         }
 
-        /* --- SECTIONS --- */
+        @media (min-width: 768px) { .btn-mignon { width: auto; } }
+
+        /* --- BENTO CARDS --- */
+        .bento-card {
+            background: white;
+            border: 2px solid var(--rose-bordure);
+            border-radius: 35px;
+            padding: 25px;
+            height: 100%;
+            transition: transform 0.3s;
+        }
+        .bento-card:hover { transform: translateY(-5px); }
+
+        .img-da { width: 100%; border-radius: 25px; border: 6px solid var(--rose-pale); }
+
+        .chat-img-box {
+            width: 100%; height: 250px; object-fit: cover; border-radius: 20px; margin-bottom: 15px;
+        }
+
+        /* --- FORMULAIRE --- */
+        .form-control {
+            border-radius: 15px; border: 2px solid var(--rose-pale); padding: 12px;
+            transition: border-color 0.3s;
+        }
+        .form-control:focus { border-color: var(--rose-accent); box-shadow: none; }
+
         .page-section { display: none; padding: 30px 0; }
-        .page-section.active { display: block; }
-        h2 { font-weight: 900; color: var(--rose-accent); font-size: 1.8rem; margin-bottom: 20px; }
+        .page-section.active { display: block; animation: fadeIn 0.4s; }
+        h2 { font-weight: 900; color: var(--rose-accent); }
 
-        @media (min-width: 768px) {
-            h2 { font-size: 2.5rem; }
-            .navbar-brand img { height: 100px; }
-            .bento-card { padding: 35px; border-radius: 40px; }
-        }
-
-        /* --- FOOTER SOCIAL --- */
-        .social-links a {
-            color: var(--rose-accent);
-            font-size: 1.5rem;
-            margin: 0 10px;
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
@@ -110,89 +92,79 @@
 <div class="site-wrapper">
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid p-0">
-            <a class="navbar-brand" onclick="changerPage('accueil')" style="cursor:pointer">
+            <a class="navbar-brand" onclick="changerPage('accueil')">
                 <img src="https://raw.githubusercontent.com/tryox-hub/mon-asso-chats/main/logo.png" alt="Logo">
             </a>
             <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <i class="fas fa-bars" style="color: var(--rose-accent); font-size: 1.5rem;"></i>
+                <i class="fas fa-bars" style="color: var(--rose-accent); font-size: 1.8rem;"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto text-center pt-3 pt-lg-0">
-                    <li class="nav-item"><a class="nav-link" onclick="changerPage('accueil')">Accueil</a></li>
-                    <li class="nav-item"><a class="nav-link" onclick="changerPage('apropos')">À propos</a></li>
-                    <li class="nav-item"><a class="nav-link" onclick="changerPage('chats')">Nos Chats</a></li>
-                    <li class="nav-item"><a class="nav-link" onclick="changerPage('chatons')">Nos Chatons</a></li>
-                    <li class="nav-item"><a class="nav-link" onclick="changerPage('contact')">Contact</a></li>
+                <ul class="navbar-nav ms-auto text-center fw-bold">
+                    <li class="nav-item"><a class="nav-link px-3" onclick="changerPage('accueil')">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" onclick="changerPage('apropos')">À propos</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" onclick="changerPage('chats')">Nos Chats</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" onclick="changerPage('chatons')">Nos Chatons</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" onclick="changerPage('contact')">Contact</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
     <section id="accueil" class="page-section active">
-        <div class="row align-items-center g-4">
+        <div class="row align-items-center g-5">
             <div class="col-lg-6 text-center text-lg-start">
-                <h2>Adoptez le bonheur, sauve de vie !</h2>
-                <p class="fs-5">Offrez une seconde chance à nos minouches. Chaque adoption est un acte d'amour qui sauve deux vies.</p>
-                <button class="btn-mignon mt-3" onclick="changerPage('chats')">Voir nos Minouches ❤️</button>
+                <h2 class="display-5 mb-4">Adoptez le bonheur, sauve de vie !</h2>
+                <p class="fs-5 mb-4">Changez le destin d'un minouche. Chaque adoption est une victoire contre l'abandon.</p>
+                <button class="btn-mignon" onclick="changerPage('chats')">Nos Minouches ❤️</button>
             </div>
             <div class="col-lg-6">
-                <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=800" class="img-da">
+                <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=800" class="img-da shadow-sm">
             </div>
         </div>
     </section>
 
     <section id="apropos" class="page-section">
-        <div class="row align-items-center g-4">
-            <div class="col-lg-6 order-2 order-lg-1">
-                <img src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=800" class="img-da">
-            </div>
-            <div class="col-lg-6 order-1 order-lg-2 text-center text-lg-start">
-                <h2>À propos de nous</h2>
-                <p><strong>Pas touche aux Minouches</strong> est une association dédiée à la protection et au sauvetage des félins.</p>
-                <p>Nous soignons, stérilisons et trouvons des familles pour la vie. Notre équipe est composée de bénévoles passionnés.</p>
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6"><img src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=800" class="img-da"></div>
+            <div class="col-lg-6">
+                <h2 class="mb-4">À propos de nous</h2>
+                <p class="fs-5">Nous sommes une équipe de passionnés qui dédient leur temps à la protection animale.</p>
+                <p>Notre mission : Stériliser, soigner et trouver la famille parfaite pour chaque chat qui croise notre route.</p>
             </div>
         </div>
     </section>
 
-    <section id="chats" class="page-section">
-        <h2 class="text-center mb-4">Nos Chats Adultes 🐱</h2>
-        <div id="liste-adultes" class="row g-4"></div>
-    </section>
-
-    <section id="chatons" class="page-section">
-        <h2 class="text-center mb-4">Nos Petits Chatons 🍼</h2>
-        <div id="liste-chatons" class="row g-4"></div>
-    </section>
+    <section id="chats" class="page-section"><h2 class="text-center mb-5">Nos Chats Adultes 🐱</h2><div id="liste-adultes" class="row g-4"></div></section>
+    <section id="chatons" class="page-section"><h2 class="text-center mb-5">Nos Petits Chatons 🍼</h2><div id="liste-chatons" class="row g-4"></div></section>
 
     <section id="contact" class="page-section">
         <div class="row g-4">
             <div class="col-lg-5">
                 <div class="bento-card text-center">
-                    <h3>Contactez-nous 💌</h3>
-                    <p class="small">Une question ? Une envie d'adopter ?</p>
-                    <p class="fw-bold mt-3 mb-1">Email :</p>
-                    <p class="small">pastoucheauxminouches@gmail.com</p>
-                    <div class="social-links mt-3">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    <h3 class="fw-bold mb-3">Contact 💌</h3>
+                    <p>Une question ? Écrivez-nous !</p>
+                    <p class="fw-bold text-pink">pastoucheauxminouches@gmail.com</p>
+                    <div class="social-links mt-4">
+                        <a href="#" class="mx-2"><i class="fab fa-facebook fa-2x"></i></a>
+                        <a href="#" class="mx-2"><i class="fab fa-instagram fa-2x"></i></a>
                     </div>
                 </div>
             </div>
             <div class="col-lg-7">
                 <div class="bento-card">
-                    <form id="contactForm">
-                        <input type="text" class="form-control mb-3" placeholder="Votre prénom" required>
-                        <input type="email" class="form-control mb-3" placeholder="Votre email" required>
-                        <textarea class="form-control mb-3" rows="4" placeholder="Votre message..." required></textarea>
-                        <button type="submit" class="btn-mignon">Envoyer le message 🐾</button>
+                    <form id="monFormulaire">
+                        <input type="text" id="prenom" class="form-control mb-3" placeholder="Votre prénom" required>
+                        <input type="email" id="email" class="form-control mb-3" placeholder="Votre email" required>
+                        <textarea id="message" class="form-control mb-3" rows="4" placeholder="Votre message..." required></textarea>
+                        <button type="submit" class="btn-mignon">Envoyer à l'association 🐾</button>
                     </form>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="text-center py-4 mt-5 border-top">
-        <p class="small text-muted mb-0">© 2026 Pas touche aux Minouches | Association Loi 1901</p>
+    <footer class="text-center py-5 border-top mt-5">
+        <p class="small text-muted">© 2026 Pas touche aux Minouches | Sauvetage & Amour</p>
     </footer>
 </div>
 
@@ -204,36 +176,40 @@
         document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
         document.getElementById(pageId).classList.add('active');
         window.scrollTo(0,0);
-        
-        // Fermeture automatique du menu sur mobile après clic
-        const navbarCollapse = document.getElementById('navbarNav');
-        const bsCollapse = new bootstrap.Collapse(navbarCollapse, {toggle: false});
-        bsCollapse.hide();
+        const nav = document.getElementById('navbarNav');
+        if(nav.classList.contains('show')) { new bootstrap.Collapse(nav).hide(); }
     }
+
+    // GESTION DU FORMULAIRE (Envoi par mail direct)
+    document.getElementById('monFormulaire').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const prenom = document.getElementById('prenom').value;
+        const message = document.getElementById('message').value;
+        const mailtoLink = `mailto:pastoucheauxminouches@gmail.com?subject=Message de ${prenom}&body=${encodeURIComponent(message)}`;
+        window.location.href = mailtoLink;
+    });
 
     async function chargerAnimaux() {
         try {
             const records = await pb.collection('chats').getFullList({ sort: '-created' });
-            const contAdultes = document.getElementById('liste-adultes');
-            const contChatons = document.getElementById('liste-chatons');
-            contAdultes.innerHTML = ''; contChatons.innerHTML = '';
+            const contA = document.getElementById('liste-adultes');
+            const contC = document.getElementById('liste-chatons');
+            contA.innerHTML = ''; contC.innerHTML = '';
 
             records.forEach(chat => {
                 const photoUrl = chat.photos ? pb.files.getUrl(chat, chat.photos) : '';
                 const ageText = chat.age + (chat.age && !isNaN(chat.age) ? " ans" : "");
-
-                const html = `
+                const card = `
                     <div class="col-12 col-md-6 col-lg-4">
                         <div class="bento-card">
                             <img src="${photoUrl}" class="chat-img-box">
-                            <h4 class="fw-bold mb-1">${chat.nom}</h4>
-                            <span class="badge mb-3" style="background:var(--rose-pale); color:var(--rose-accent)">${ageText}</span>
+                            <h4 class="fw-bold">${chat.nom}</h4>
+                            <span class="badge mb-2" style="background:var(--rose-pale); color:var(--rose-accent)">${ageText}</span>
                             <p class="small flex-grow-1">${chat.description || ''}</p>
                             <button class="btn-mignon mt-3" onclick="window.location.href='mailto:pastoucheauxminouches@gmail.com?subject=Adoption ${chat.nom}'">M'adopter ❤️</button>
                         </div>
                     </div>`;
-                if (chat.est_chaton) contChatons.innerHTML += html;
-                else contAdultes.innerHTML += html;
+                if (chat.est_chaton) contC.innerHTML += card; else contA.innerHTML += card;
             });
         } catch (err) { console.error(err); }
     }
