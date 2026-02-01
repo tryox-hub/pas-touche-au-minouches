@@ -6,180 +6,200 @@
     <title>Pas touche aux Minouches 🐾</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pocketbase/0.21.3/pocketbase.umd.min.js"></script>
     
     <style>
         :root { 
-            --rose-fond: #fff5f7; 
-            --rose-accent: #ffb7c5; 
-            --rose-bouton: #ff7e9d;
-            --texte: #5a4a4d;
+            --rose-pale: #fdf2f5;    /* Couleur de fond douce */
+            --rose-accent: #ff8e9d;  /* Rose corail pour les boutons/titres */
+            --rose-bordure: #ffe0e6; /* Rose très léger pour les contours */
+            --texte: #5a4b4e;        /* Gris chaud pour le texte */
         }
 
         body { 
             font-family: 'Nunito', sans-serif; 
-            background-color: #ffffff; 
+            background-color: white; 
             color: var(--texte);
-            padding: 20px;
+            margin: 0;
+            padding: 0;
         }
 
-        /* --- CADRE GLOBAL STYLE DA --- */
-        .page-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            border: 15px solid var(--rose-accent); /* La grosse bordure rose de l'image */
-            border-radius: 80px;
-            background-color: white;
-            padding-bottom: 40px;
-            overflow: hidden;
+        /* --- CONTENEUR LARGE (Empêche l'aspect rétréci) --- */
+        .site-wrapper {
+            max-width: 1300px;
+            margin: 20px auto;
+            background: white;
+            min-height: 100vh;
         }
 
-        /* --- HEADER --- */
-        header { text-align: center; padding: 40px 20px; }
-        header img { max-height: 120px; margin-bottom: 20px; }
-        
-        .custom-nav {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
-        .nav-item-custom {
+        /* --- NAVIGATION --- */
+        .navbar { padding: 30px 0; }
+        .navbar-brand img { height: 100px; transition: 0.3s; }
+        .nav-link { 
+            font-weight: 800; 
+            color: var(--texte) !important; 
+            font-size: 1.1rem;
+            margin: 0 15px;
             cursor: pointer;
-            font-weight: 800;
-            padding: 8px 15px;
-            border-radius: 20px;
-            transition: 0.3s;
-            color: var(--texte);
-            text-decoration: none;
         }
-        .nav-item-custom:hover { background: var(--rose-fond); color: var(--rose-bouton); }
+        .nav-link:hover { color: var(--rose-accent) !important; }
 
-        /* --- CARTES BENTO --- */
+        /* --- CARTES BENTO (Style DA) --- */
         .bento-card {
             background: white;
-            border: 4px solid var(--rose-fond);
-            border-radius: 45px;
-            padding: 25px;
+            border: 2px solid var(--rose-bordure);
+            border-radius: 40px;
+            padding: 30px;
             height: 100%;
+            box-shadow: 0 10px 30px rgba(255, 142, 157, 0.05);
             transition: 0.3s;
-            box-shadow: 0 10px 0px var(--rose-fond); /* Ombre plate style illustration */
         }
+        .bento-card:hover { transform: translateY(-5px); border-color: var(--rose-accent); }
 
+        /* --- BOUTONS --- */
         .btn-mignon {
-            background-color: var(--rose-bouton);
+            background-color: var(--rose-accent);
             color: white;
             border: none;
             border-radius: 50px;
-            padding: 10px 25px;
+            padding: 12px 30px;
             font-weight: 900;
-            font-size: 0.9rem;
-            box-shadow: 0 4px 0px #e06683;
-            transition: 0.2s;
+            font-size: 1rem;
+            text-transform: none;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 142, 157, 0.3);
         }
-        .btn-mignon:active { transform: translateY(4px); box-shadow: none; }
+        .btn-mignon:hover { background-color: #ff7586; color: white; transform: scale(1.05); }
 
-        /* --- AFFICHAGE CHATS --- */
-        .chat-img {
+        /* --- SECTION IMAGES (Style Z-Layout) --- */
+        .img-da {
             width: 100%;
-            height: 220px;
+            border-radius: 40px;
+            border: 10px solid var(--rose-pale);
+        }
+
+        /* --- CHATS CARDS --- */
+        .chat-img-box {
+            width: 100%;
+            height: 280px;
             object-fit: cover;
-            border-radius: 35px;
-            margin-bottom: 15px;
-            border: 3px solid var(--rose-fond);
+            border-radius: 30px;
+            margin-bottom: 20px;
+        }
+        .age-badge {
+            background: var(--rose-pale);
+            color: var(--rose-accent);
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-weight: 800;
+            display: inline-block;
+            margin-bottom: 10px;
         }
 
         /* --- SECTIONS --- */
-        .page-section { display: none; padding: 0 30px; }
-        .page-section.active { display: block; animation: softFade 0.5s; }
+        .page-section { display: none; padding: 40px 20px; }
+        .page-section.active { display: block; animation: fadeIn 0.6s ease-out; }
 
-        @keyframes softFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        h2 { font-weight: 900; color: var(--rose-accent); margin-bottom: 20px; font-size: 2.2rem; }
 
         @media (max-width: 768px) {
-            .page-container { border-width: 8px; border-radius: 40px; }
-            h2 { font-size: 1.5rem; }
+            .navbar-brand img { height: 70px; }
+            h2 { font-size: 1.8rem; }
+            .bento-card { border-radius: 30px; padding: 20px; }
         }
     </style>
 </head>
 <body>
 
-<div class="page-container">
-    <header>
-        <img src="https://raw.githubusercontent.com/tryox-hub/mon-asso-chats/main/logo.png" alt="Logo">
-        <div class="custom-nav">
-            <span class="nav-item-custom" onclick="changerPage('accueil')">Accueil</span>
-            <span class="nav-item-custom" onclick="changerPage('chats')">Nos Chats</span>
-            <span class="nav-item-custom" onclick="changerPage('contact')">Contact</span>
-            <span class="nav-item-custom" onclick="changerPage('don')">Faire un Don</span>
+<div class="site-wrapper">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="#" onclick="changerPage('accueil')">
+                <img src="https://raw.githubusercontent.com/tryox-hub/mon-asso-chats/main/logo.png" alt="Logo">
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" onclick="changerPage('accueil')">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" onclick="changerPage('chats')">Nos Chats</a></li>
+                    <li class="nav-item"><a class="nav-link" onclick="changerPage('chatons')">Nos Chatons</a></li>
+                    <li class="nav-item"><a class="nav-link" onclick="changerPage('contact')">Contact</a></li>
+                </ul>
+            </div>
         </div>
-    </header>
+    </nav>
 
     <section id="accueil" class="page-section active">
-        <div class="row g-4">
-            <div class="col-md-7">
-                <div class="bento-card d-flex align-items-center">
-                    <div>
-                        <h2 class="fw-black">Adoptez le bonheur, sauve de vie !</h2>
-                        <p>Trouvez le compagnon qui changera votre quotidien.</p>
-                        <button class="btn-mignon" onclick="changerPage('chats')">Voir les chats 🐾</button>
-                    </div>
-                </div>
+        <div class="row align-items-center mb-5">
+            <div class="col-md-6 pe-md-5">
+                <h2>Adoptez le bonheur, sauve de vie !</h2>
+                <p class="fs-5 mb-4">Nous sommes une association dédiée à sauver les chats de la rue et de l'abandon, rassemblant des cœurs bienveillants pour cette noble cause.</p>
+                <button class="btn-mignon" onclick="changerPage('chats')">Nos Chats ❤️</button>
             </div>
-            <div class="col-md-5">
-                <div class="bento-card text-center">
-                    <h3 class="fw-bold">Nos Chats 🐱</h3>
-                    <p class="small">Découvrez tous nos minouches en attente d'une famille.</p>
-                    <button class="btn-mignon" onclick="changerPage('chats')">Explorer</button>
-                </div>
+            <div class="col-md-6 mt-4 mt-md-0">
+                <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=800" class="img-da">
             </div>
-            <div class="col-md-4">
+        </div>
+
+        <div class="row align-items-center mb-5 flex-md-row-reverse">
+            <div class="col-md-6 ps-md-5">
+                <h2>Notre mission</h2>
+                <p class="fs-5 mb-4">Stériliser, soigner et trouver des foyers aimants. Nous luttons quotidiennement contre l'abandon pour assurer le bonheur de nos protégés.</p>
+                <button class="btn-mignon" onclick="changerPage('chatons')">Découvrir les chatons</button>
+            </div>
+            <div class="col-md-6 mt-4 mt-md-0">
+                <img src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=800" class="img-da">
+            </div>
+        </div>
+
+        <div class="row g-4 mt-5">
+            <div class="col-md-6">
                 <div class="bento-card">
-                    <h4 class="fw-bold">Notre Mission</h4>
-                    <p class="small">Sauver, soigner et protéger les chats de la rue.</p>
+                    <h3 class="fw-bold">Comment nous aider ?</h3>
+                    <p>Devenez famille d'accueil ou bénévole pour nous aider sur le terrain.</p>
+                    <button class="btn-mignon mt-2">Nous rejoindre</button>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="bento-card">
-                    <h4 class="fw-bold">Nos Valeurs</h4>
-                    <p class="small">Respect, amour et bienveillance animale.</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="bento-card">
-                    <h4 class="fw-bold">Chatons</h4>
-                    <p class="small">Nos petits derniers cherchent aussi un foyer.</p>
+                    <h3 class="fw-bold">Faire un don</h3>
+                    <p>Chaque don permet de financer les soins vétérinaires et la nourriture.</p>
+                    <button class="btn-mignon mt-2">Faire un don 💌</button>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="chats" class="page-section">
-        <h2 class="text-center mb-5 fw-black">Nos protégés</h2>
-        <div id="grille-chats" class="row g-4"></div>
+        <h2 class="text-center mb-5">Nos Minouches Adultes 🐱</h2>
+        <div id="liste-adultes" class="row row-cols-1 row-cols-md-3 g-4"></div>
+    </section>
+
+    <section id="chatons" class="page-section">
+        <h2 class="text-center mb-5">Nos Petits Chatons 🍼</h2>
+        <div id="liste-chatons" class="row row-cols-1 row-cols-md-3 g-4"></div>
     </section>
 
     <section id="contact" class="page-section">
         <div class="bento-card text-center py-5">
-            <h2 class="fw-black">Prendre contact 💌</h2>
-            <p class="fs-5">pastoucheauxminouches@gmail.com</p>
-            <a href="mailto:pastoucheauxminouches@gmail.com" class="btn-mignon text-decoration-none">Nous écrire</a>
+            <h2>Prêt à ouvrir votre coeur ? 💌</h2>
+            <p class="fs-4 mb-4">pastoucheauxminouches@gmail.com</p>
+            <a href="mailto:pastoucheauxminouches@gmail.com" class="btn-mignon text-decoration-none">Nous contacter</a>
         </div>
     </section>
 
-    <section id="don" class="page-section text-center">
-        <div class="bento-card">
-            <h2 class="fw-black">Aider l'association 💖</h2>
-            <p>Vos dons permettent de financer les soins vétérinaires.</p>
-            <button class="btn-mignon">Accéder à la cagnotte</button>
-        </div>
-    </section>
+    <footer class="text-center py-5 border-top mt-5">
+        <p class="fw-bold mb-1">Pas touche aux Minouches</p>
+        <p class="small text-muted mb-0">Association Loi 1901 | Mentions légales | RNA : [Ton Numéro]</p>
+    </footer>
 </div>
 
-<footer class="text-center mt-4">
-    <p class="small text-muted">© 2026 Pas touche aux Minouches | <span onclick="changerPage('accueil')" style="cursor:pointer">Mentions légales</span></p>
-</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
     const pb = new PocketBase('/');
@@ -188,30 +208,44 @@
         document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
         document.getElementById(pageId).classList.add('active');
         window.scrollTo(0,0);
+        
+        // Ferme le menu mobile automatiquement
+        const navbarCollapse = document.getElementById('navbarNav');
+        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+        if (bsCollapse) { bsCollapse.hide(); }
     }
 
     async function chargerAnimaux() {
         try {
             const records = await pb.collection('chats').getFullList({ sort: '-created' });
-            const container = document.getElementById('grille-chats');
-            container.innerHTML = '';
+            const contAdultes = document.getElementById('liste-adultes');
+            const contChatons = document.getElementById('liste-chatons');
+            contAdultes.innerHTML = ''; contChatons.innerHTML = '';
 
             records.forEach(chat => {
-                const photoUrl = chat.photos ? pb.files.getUrl(chat, chat.photos) : 'https://via.placeholder.com/300';
-                const ageText = chat.age + (isNaN(chat.age) ? "" : " ans");
+                const photoUrl = chat.photos ? pb.files.getUrl(chat, chat.photos) : '';
                 
-                container.innerHTML += `
-                    <div class="col-md-4">
+                // Correction : Gestion de l'âge propre avec "ans"
+                let ageAffichage = chat.age;
+                if (!isNaN(ageAffichage) && ageAffichage !== "") {
+                    ageAffichage = ageAffichage + " ans";
+                }
+
+                const html = `
+                    <div class="col">
                         <div class="bento-card">
-                            <img src="${photoUrl}" class="chat-img">
-                            <h3 class="fw-bold h5 mb-1">${chat.nom}</h3>
-                            <span class="badge mb-2" style="background:var(--rose-fond); color:var(--rose-bouton)">${ageText}</span>
-                            <p class="small text-muted mb-3">${chat.description || ''}</p>
-                            <button class="btn-mignon w-100" onclick="window.location.href='mailto:pastoucheauxminouches@gmail.com'">M'adopter ❤️</button>
+                            <img src="${photoUrl}" class="chat-img-box" alt="${chat.nom}">
+                            <div class="age-badge">${ageAffichage}</div>
+                            <h3 class="fw-bold h4 mb-2">${chat.nom}</h3>
+                            <p class="text-muted small mb-3" style="min-height: 50px;">${chat.description || 'Pas de description pour le moment.'}</p>
+                            <button class="btn-mignon w-100" onclick="window.location.href='mailto:pastoucheauxminouches@gmail.com?subject=Adoption ${chat.nom}'">M'adopter ❤️</button>
                         </div>
                     </div>`;
+                
+                if (chat.est_chaton) contChatons.innerHTML += html;
+                else contAdultes.innerHTML += html;
             });
-        } catch (err) { console.error(err); }
+        } catch (err) { console.error("Erreur PocketBase:", err); }
     }
     chargerAnimaux();
 </script>
