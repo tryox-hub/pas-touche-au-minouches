@@ -457,15 +457,32 @@
             records.forEach(chat => {
 
                 const photoUrl = chat.photos ? pb.files.getUrl(chat, chat.photos) : 'https://via.placeholder.com/300';
+                
+                // Préparer les informations à afficher
+                const nom = chat.nom || 'Sans nom';
+                const description = chat.description || '';
+                const age = chat.age || 'Non précisé';
+                const sexe = chat.sexe || 'Non précisé';
+                const sexeIcon = sexe.toLowerCase() === 'mâle' || sexe.toLowerCase() === 'male' ? '♂️' : sexe.toLowerCase() === 'femelle' ? '♀️' : '';
 
-                const cardHTML = `<div class="col-md-4"><div class="bento-card text-center"><img src="${photoUrl}" style="width:100%; height:200px; object-fit:cover; border-radius:20px" class="mb-3"><h4>${chat.nom}</h4><button class="btn-mignon mt-2" onclick="window.location.href='mailto:pastoucheauxminouches@gmail.com?subject=Adoption ${chat.nom}'">M'adopter ❤️</button></div></div>`;
+                const cardHTML = `
+                    <div class="col-md-4">
+                        <div class="bento-card text-center">
+                            <img src="${photoUrl}" style="width:100%; height:200px; object-fit:cover; border-radius:20px" class="mb-3">
+                            <h4 class="mb-2">${nom} ${sexeIcon}</h4>
+                            <div class="text-start mb-3">
+                                <p class="mb-1 small"><strong>Âge :</strong> ${age}</p>
+                                <p class="mb-1 small"><strong>Sexe :</strong> ${sexe}</p>
+                                ${description ? `<p class="small text-muted mt-2">${description}</p>` : ''}
+                            </div>
+                            <button class="btn-mignon mt-2" onclick="window.location.href='mailto:pastoucheauxminouches@gmail.com?subject=Adoption ${nom}'">M'adopter ❤️</button>
+                        </div>
+                    </div>`;
 
-                // Filtrer par catégorie (chaton ou chat adulte)
-                // Si vous avez un champ 'categorie' dans votre base de données PocketBase
-                if (chat.categorie === 'chaton') {
+                // Filtrer par le champ est_chaton (booléen)
+                if (chat.est_chaton === true) {
                     contChatons.innerHTML += cardHTML;
                 } else {
-                    // Par défaut, considérer comme chat adulte
                     contChats.innerHTML += cardHTML;
                 }
 
