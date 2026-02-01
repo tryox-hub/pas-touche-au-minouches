@@ -29,6 +29,7 @@
             background-color: var(--rose-accent); color: white !important; border: none; border-radius: 50px;
             padding: 12px 25px; font-weight: 900; transition: all 0.2s ease;
             box-shadow: 0 4px 0px var(--rose-dark); position: relative; top: 0; width: 100%; text-decoration: none; display: inline-block;
+            text-align: center;
         }
         .btn-mignon:hover { transform: translateY(-2px); box-shadow: 0 6px 0px var(--rose-dark); }
         .btn-mignon:active { top: 3px; box-shadow: 0 1px 0px var(--rose-dark); }
@@ -45,6 +46,8 @@
         .page-section { display: none; padding: 40px 0; }
         .page-section.active { display: block; animation: fadeIn 0.5s; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .badge-chaton { background: var(--rose-accent); color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; position: absolute; top: 20px; right: 20px; }
     </style>
 </head>
 <body>
@@ -74,7 +77,7 @@
         <div class="row align-items-center g-5 mb-5">
             <div class="col-lg-6 text-center text-lg-start">
                 <h2 class="display-5 fw-bold" style="color:var(--rose-accent)">Donner une seconde chance aux minouches de la Somme.</h2>
-                <p class="fs-5 mb-4 text-muted">Depuis avril 2024, <strong>Pas touche aux Minouches</strong> se bat pour sortir les chats de la rue. Nous les soignons, les aimons et leur trouvons la famille qu'ils méritent.</p>
+                <p class="fs-5 mb-4 text-muted">Depuis avril 2024, <strong>Pas touche aux Minouches</strong> se bat pour sortir les chats et <strong>chatons</strong> de la rue. Nous les soignons, les aimons et leur trouvons la famille qu'ils méritent.</p>
                 <div class="d-flex gap-3 justify-content-center justify-content-lg-start">
                     <button class="btn-mignon" onclick="changerPage('chats')">Adopter un chat ❤️</button>
                     <button class="btn-mignon" style="background:var(--rose-pale); color:var(--rose-accent) !important; box-shadow:none;" onclick="changerPage('donations')">Aider l'association</button>
@@ -86,11 +89,11 @@
         <div class="row mb-5">
             <div class="col-12 text-center mb-5">
                 <h2 style="color:var(--rose-accent)">Le parcours de l'adoption</h2>
-                <p class="text-muted">Adopter est un acte responsable, voici comment nous procédons :</p>
+                <p class="text-muted">Adopter un chat ou un chaton est un acte responsable :</p>
             </div>
-            <div class="col-md-4 mb-3"><div class="step-card"><div class="step-icon"><i class="fas fa-search"></i></div><h4>1. Le Coup de Cœur</h4><p class="small">Consultez nos protégés en ligne ou sur nos réseaux sociaux pour trouver votre futur compagnon.</p></div></div>
-            <div class="col-md-4 mb-3"><div class="step-card"><div class="step-icon"><i class="fas fa-file-signature"></i></div><h4>2. Le Questionnaire</h4><p class="small">Nous échangeons sur votre mode de vie pour s'assurer que le chat s'y épanouira pleinement.</p></div></div>
-            <div class="col-md-4 mb-3"><div class="step-card"><div class="step-icon"><i class="fas fa-home"></i></div><h4>3. La Rencontre</h4><p class="small">Rencontrez le minouche dans sa famille d'accueil pour confirmer le lien magique.</p></div></div>
+            <div class="col-md-4 mb-3"><div class="step-card"><div class="step-icon"><i class="fas fa-search"></i></div><h4>1. Le Coup de Cœur</h4><p class="small">Consultez nos protégés en ligne pour trouver votre futur compagnon.</p></div></div>
+            <div class="col-md-4 mb-3"><div class="step-card"><div class="step-icon"><i class="fas fa-file-signature"></i></div><h4>2. Le Questionnaire</h4><p class="small">Nous échangeons sur votre mode de vie pour le bien du minouche.</p></div></div>
+            <div class="col-md-4 mb-3"><div class="step-card"><div class="step-icon"><i class="fas fa-home"></i></div><h4>3. La Rencontre</h4><p class="small">Rencontrez le chat dans sa famille d'accueil avant l'adoption.</p></div></div>
         </div>
     </section>
 
@@ -99,9 +102,10 @@
             <div class="col-lg-6"><img src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=800" class="img-fluid rounded-5 shadow"></div>
             <div class="col-lg-6">
                 <h2 style="color:var(--rose-accent)">Notre Histoire et notre Combat 🐾</h2>
-                <p class="fs-5">Basée dans la <strong>Somme (80)</strong>, notre association loi 1901 est née d'un constat simple : trop de chats souffrent de l'abandon et de la faim.</p>
-                <p>Nous ne possédons pas de refuge physique. Tous nos chats vivent en <strong>familles d'accueil</strong>, au chaud, pour être sociabilisés et aimés comme des membres de la famille avant leur adoption définitive.</p>
-                <p><strong>Nos actions prioritaires :</strong> La stérilisation pour éviter la prolifération, l'identification obligatoire et les soins vétérinaires d'urgence.</p>
+                <p class="fs-5">Basée à <strong>Amiens (80)</strong>, notre association loi 1901 est née d'un constat simple : trop de chats souffrent de l'abandon.</p>
+                <p>Nous ne possédons pas de refuge. Tous nos chats vivent en <strong>familles d'accueil</strong> pour être sociabilisés et aimés.</p>
+                <p><strong>Nos actions :</strong> Stérilisation, identification et soins d'urgence pour chats et chatons.</p>
+                <p class="small">Présidente : <strong>Mme Nathalie Hecquefeuille</strong></p>
             </div>
         </div>
 
@@ -109,27 +113,30 @@
             <div class="col-6 col-md-3"><div class="stat-box"><span class="stat-number">80</span><span class="small fw-bold">Département</span></div></div>
             <div class="col-6 col-md-3"><div class="stat-box"><span class="stat-number">2024</span><span class="small fw-bold">Création</span></div></div>
             <div class="col-6 col-md-3"><div class="stat-box"><span class="stat-number">2.5K</span><span class="small fw-bold">Abonnés FB</span></div></div>
-            <div class="col-6 col-md-3"><div class="stat-box"><span class="stat-number">100%</span><span class="small fw-bold">Bénévolat</span></div></div>
+            <div class="col-6 col-md-3"><div class="stat-box"><span class="stat-number">100%</span><span class="small fw-bold">Passion</span></div></div>
         </div>
 
         <div class="bento-card"><h3 class="text-center mb-5">Pourquoi nous soutenir ?</h3>
             <div class="row text-center">
-                <div class="col-md-4 mb-4"><i class="fas fa-heart fa-3x text-rose mb-3"></i><h5>Éthique</h5><p class="small text-muted">Nous plaçons le bien-être animal au-dessus de tout, sans exception.</p></div>
-                <div class="col-md-4 mb-4"><i class="fas fa-hospital fa-3x text-rose mb-3"></i><h5>Soins</h5><p class="small text-muted">Chaque don finance directement les vaccins et opérations de nos chats.</p></div>
-                <div class="col-md-4 mb-4"><i class="fas fa-users-viewfinder fa-3x text-rose mb-3"></i><h5>Transparence</h5><p class="small text-muted">Association déclarée, nous justifions de chaque euro dépensé.</p></div>
+                <div class="col-md-4 mb-4"><i class="fas fa-heart fa-3x text-rose mb-3"></i><h5>Éthique</h5><p class="small text-muted">Nous plaçons le bien-être animal au-dessus de tout.</p></div>
+                <div class="col-md-4 mb-4"><i class="fas fa-hospital fa-3x text-rose mb-3"></i><h5>Soins</h5><p class="small text-muted">Vos dons financent les vaccins et opérations.</p></div>
+                <div class="col-md-4 mb-4"><i class="fas fa-users-viewfinder fa-3x text-rose mb-3"></i><h5>Transparence</h5><p class="small text-muted">Association déclarée, chaque euro est justifié.</p></div>
             </div>
         </div>
     </section>
 
     <section id="donations" class="page-section">
-        <div class="text-center mb-5"><h2 style="color:var(--rose-accent)">Soutenez nos actions 💝</h2><p>Le SIREN 927825497 garantit notre existence officielle.</p></div>
+        <div class="text-center mb-5"><h2 style="color:var(--rose-accent)">Soutenez nos actions 💝</h2><p>SIREN : 927825497</p></div>
         <div class="row g-4">
             <div class="col-md-6"><div class="bento-card text-center"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/HelloAsso_Logo.svg/1200px-HelloAsso_Logo.svg.png" height="40" class="mb-3"><h4>Don HelloAsso</h4><a href="TON_LIEN_HELLOASSO" target="_blank" class="btn-mignon">Donner sécurisé</a></div></div>
-            <div class="col-md-6"><div class="bento-card text-center"><i class="fab fa-paypal fa-3x mb-3" style="color:#003087"></i><h4>Cagnotte en ligne</h4><a href="TON_LIEN_AUTRE" target="_blank" class="btn-mignon" style="background:#5a4b4e;">Faire un don</a></div></div>
+            <div class="col-md-6"><div class="bento-card text-center"><img src="https://www.teaming.net/images/teaming-logo.png" height="40" class="mb-3"><h4>Teaming</h4><a href="TON_LIEN_TEAMING" target="_blank" class="btn-mignon" style="background:#5a4b4e;">1€ / mois</a></div></div>
         </div>
     </section>
 
-    <section id="chats" class="page-section"><h2 class="text-center mb-5" style="color:var(--rose-accent)">Nos protégés en attente d'une famille 🐱</h2><div id="liste-chats" class="row g-4"></div></section>
+    <section id="chats" class="page-section">
+        <h2 class="text-center mb-5" style="color:var(--rose-accent)">Nos protégés & Chatons 🐱</h2>
+        <div id="liste-chats" class="row g-4"></div>
+    </section>
 
     <section id="contact" class="page-section">
         <div class="row g-4">
@@ -138,68 +145,43 @@
                     <h4 class="mb-4">Envoyez-nous un message</h4>
                     <form action="https://formsubmit.co/pastoucheauxminouches@gmail.com" method="POST">
                         <input type="hidden" name="_captcha" value="false">
-                        <input type="hidden" name="_subject" value="Nouveau message du site Pas touche aux Minouches">
-                        
-                        <div class="mb-3">
-                            <label class="small fw-bold ms-2">Votre Prénom</label>
-                            <input type="text" name="name" class="form-control py-3 rounded-4 border-2" placeholder="Ex: Julie" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="small fw-bold ms-2">Votre Email</label>
-                            <input type="email" name="email" class="form-control py-3 rounded-4 border-2" placeholder="Ex: julie@email.com" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="small fw-bold ms-2">Votre Message</label>
-                            <textarea name="message" class="form-control rounded-4 border-2" rows="5" placeholder="Bonjour, j'aimerais des informations sur..." required></textarea>
-                        </div>
-                        
-                        <button type="submit" class="btn-mignon w-100">Envoyer mon message 🐾</button>
-                        
-                        <p class="mt-3 text-muted" style="font-size: 0.75rem;">
-                            <i class="fas fa-lock me-1"></i> Vos données sont protégées. En envoyant ce message, vous acceptez que l'association utilise vos coordonnées uniquement pour vous répondre. Aucun partage de données à des tiers n'est effectué.
-                        </p>
+                        <div class="mb-3"><input type="text" name="name" class="form-control py-3 rounded-4" placeholder="Votre Prénom" required></div>
+                        <div class="mb-3"><input type="email" name="email" class="form-control py-3 rounded-4" placeholder="Votre Email" required></div>
+                        <div class="mb-3"><textarea name="message" class="form-control rounded-4" rows="5" placeholder="Votre Message..." required></textarea></div>
+                        <button type="submit" class="btn-mignon w-100">Envoyer 🐾</button>
+                        <p class="mt-3 text-muted" style="font-size: 0.75rem;"><i class="fas fa-lock me-1"></i> Vos données sont protégées (RGPD).</p>
                     </form>
                 </div>
             </div>
-            
             <div class="col-lg-5 text-center">
-                <div class="bento-card d-flex flex-column justify-content-center">
-                    <h4 class="fw-bold mb-4">Rejoignez la communauté</h4>
-                    <div class="d-flex justify-content-center gap-4 mb-4">
-                        <a href="TON_LIEN_FACEBOOK" target="_blank" style="color:#1877F2"><i class="fab fa-facebook fa-4x"></i></a>
-                        <a href="TON_LIEN_INSTAGRAM" target="_blank" style="color:#E4405F"><i class="fab fa-instagram fa-4x"></i></a>
+                <div class="bento-card">
+                    <h4 class="fw-bold mb-3">Coordonnées</h4>
+                    <p><i class="fas fa-phone"></i> 06 76 74 40 49</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 12 Rue Frédéric Petit, Amiens</p>
+                    <hr>
+                    <div class="d-flex justify-content-center gap-4 mb-3">
+                        <a href="TON_LIEN_FB" target="_blank" style="color:#1877F2"><i class="fab fa-facebook fa-3x"></i></a>
+                        <a href="TON_LIEN_INSTA" target="_blank" style="color:#E4405F"><i class="fab fa-instagram fa-3x"></i></a>
                     </div>
-                    <p class="fw-bold">2 500 abonnés sur Facebook !</p>
-                    <p class="small text-muted">Suivez nos sauvetages en temps réel et partagez nos annonces pour aider nos minouches à être vus.</p>
+                    <p class="small">Rejoignez nos 2 500 abonnés !</p>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="mentions" class="page-section">
-        <div class="bento-card legal-text">
-            <h2 class="mb-4" style="color:var(--rose-accent)">Mentions Légales</h2>
-            <div class="row">
-                <div class="col-md-6">
-                    <p><strong>Association :</strong> Pas touche aux Minouches.<br>
-                    <strong>Objet :</strong> Protection animale félins.<br>
-                    <strong>Siège :</strong> Somme (80), France.<br>
-                    <strong>RNA :</strong> W802018780<br>
-                    <strong>SIREN :</strong> 927825497 | <strong>SIRET :</strong> 92782549700013.</p>
-                </div>
-                <div class="col-md-6">
-                    <p><strong>Hébergement :</strong> GitHub Inc.<br>
-                    88 Colin P. Kelly Jr. Street<br>
-                    San Francisco, CA 94107, USA.</p>
-                </div>
-            </div>
-            <button class="btn-mignon mt-3" onclick="changerPage('accueil')">Retour à l'accueil</button>
+        <div class="bento-card small">
+            <h2 style="color:var(--rose-accent)">Mentions Légales</h2>
+            <p><strong>Pas touche aux Minouches</strong><br>
+            Siège : 12 Rue Frédéric Petit, 80000 Amiens.<br>
+            RNA : W802018780 | SIREN : 927825497 | SIRET : 92782549700013.</p>
+            <button class="btn-mignon mt-3" onclick="changerPage('accueil')">Retour</button>
         </div>
     </section>
 
     <footer class="text-center py-5 border-top mt-5">
-        <p class="mb-1 fw-bold">© 2026 Pas touche aux Minouches - Association Loi 1901</p>
-        <p class="small text-muted mb-3">W802018780 | SIREN : 927825497 | Somme (80)</p>
+        <p class="mb-1 fw-bold">© 2026 Pas touche aux Minouches - Amiens (80)</p>
+        <p class="small text-muted mb-3">W802018780 | SIREN : 927825497</p>
         <div>
             <a onclick="changerPage('mentions')" class="text-decoration-none text-muted small me-3" style="cursor:pointer">Mentions Légales</a>
             <a onclick="changerPage('contact')" class="text-decoration-none text-muted small" style="cursor:pointer">Contact</a>
@@ -224,7 +206,18 @@
             cont.innerHTML = '';
             records.forEach(chat => {
                 const photoUrl = chat.photos ? pb.files.getUrl(chat, chat.photos) : 'https://via.placeholder.com/300';
-                cont.innerHTML += `<div class="col-md-4"><div class="bento-card text-center"><img src="${photoUrl}" style="width:100%; height:200px; object-fit:cover; border-radius:20px" class="mb-3"><h4>${chat.nom}</h4><button class="btn-mignon mt-2" onclick="window.location.href='mailto:pastoucheauxminouches@gmail.com?subject=Adoption ${chat.nom}'">M'adopter ❤️</button></div></div>`;
+                // Ajout automatique du badge si c'est un chaton (basé sur un champ 'categorie' dans pocketbase)
+                const badge = (chat.categorie === 'Chaton' || chat.age === 'Chaton') ? '<span class="badge-chaton">Chaton</span>' : '';
+                
+                cont.innerHTML += `
+                    <div class="col-md-4 position-relative">
+                        <div class="bento-card text-center">
+                            ${badge}
+                            <img src="${photoUrl}" style="width:100%; height:200px; object-fit:cover; border-radius:20px" class="mb-3">
+                            <h4>${chat.nom}</h4>
+                            <button class="btn-mignon mt-2" onclick="window.location.href='mailto:pastoucheauxminouches@gmail.com?subject=Adoption ${chat.nom}'">M'adopter ❤️</button>
+                        </div>
+                    </div>`;
             });
         } catch (err) { console.error(err); }
     }
